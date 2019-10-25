@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>Hello World | 杨雯淇的博客</title>
+  <title>可靠的TCP和不可靠的IP | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="对《TCP/IP详解卷一》中“TCP在不可靠的IP层上提供一个可靠的传输层”这句话的理解。见下图：   我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/06/30/hello-world/index.html">
+<meta property="og:title" content="可靠的TCP和不可靠的IP">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/10/25/可靠的TCP和不可靠的IP/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="对《TCP/IP详解卷一》中“TCP在不可靠的IP层上提供一个可靠的传输层”这句话的理解。见下图：   我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-30T02:30:55.250Z">
+<meta property="og:image" content="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041">
+<meta property="og:updated_time" content="2019-10-25T10:48:06.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="可靠的TCP和不可靠的IP">
+<meta name="twitter:description" content="对《TCP/IP详解卷一》中“TCP在不可靠的IP层上提供一个可靠的传输层”这句话的理解。见下图：   我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不">
+<meta name="twitter:image" content="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041">
   
     <link rel="alternative" href="/atom.xml" title="杨雯淇的博客" type="application/atom+xml">
   
@@ -161,39 +163,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-可靠的TCP和不可靠的IP" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      可靠的TCP和不可靠的IP
     </h1>
   
 
         
-        <a href="/2019/06/30/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-30T02:30:55.249Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
+        <a href="/2019/10/25/可靠的TCP和不可靠的IP/" class="archive-article-date">
+  	<time datetime="2019-10-25T10:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <blockquote>
+<p>对《TCP/IP详解卷一》中“<strong>TCP在不可靠的IP层上提供一个可靠的传输层</strong>”这句话的理解。见下图：</p>
+</blockquote>
+<p><img src="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041" alt></p>
+<p>我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不清楚这个包裹内的东西是什么，他只用负责把这个包裹按照上面写的地址送到买家的手中（IP路由的过程）。由于网络层协议（IP）和快递一样不总是都靠谱，所以丢包是难免的。一旦出现丢包，长期没有收到快递的愤怒的买家就会找到卖家，倒霉的卖家只能把那部手机重新再发一次（一般快递都会推脱责任不予赔偿），这个过程就叫做TCP的超时重传。流着泪的卖家把新的包裹再次交给收件员，对于卖家而言这确实是再次。但是对于收件员而言，这只是一个普通的包裹，绝对不可能知道这是上次丢失包裹的一次重传。（这也是网络分层的目的，向下层隐藏上层的工作细节）。非常幸运的是，这次快递公司“不辱使命”成功完成了任务，把包裹交给了淘宝买家，买家对手机进行检查并且给卖家进行确认（TCP对数据的确认），本次会话结束。</p>
 
       
 
@@ -278,7 +272,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/06/30/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/10/25/可靠的TCP和不可靠的IP/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,15 +286,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/30/我的第一篇博客/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
+    <a href="/2019/10/25/TCP-IP的比喻/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TCP/IP的比喻</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
