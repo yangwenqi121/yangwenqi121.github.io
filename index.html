@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 8
+    总文章数 9
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,79 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-windows编程贪吃蛇——吃食物身体变长" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">windows编程贪吃蛇——吃食物身体变长</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/" class="archive-article-date">
+  	<time datetime="2019-10-26T16:41:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇实现了蛇身的移动，接下来创建食物并且让蛇能够因为吃食物而身体变长</p>
+<p>4.制作食物<br>分为两个步骤，设定食物坐标，画出食物</p>
+<p>设定食物坐标<br>     <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POINT ptFood = &#123; <span class="number">20</span>,<span class="number">20</span> &#125;;<span class="comment">//初始化食物坐标</span></span><br></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//初始化蛇</span></span><br><span class="line"><span class="function">VOID <span class="title">InitSnake</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//先清空坐标</span></span><br><span class="line">    vSnakePoint.clear();</span><br><span class="line">    <span class="comment">//给蛇坐标分配空间</span></span><br><span class="line">    vSnakePoint.resize(SNAKEMAX);</span><br><span class="line">    <span class="comment">//游戏结束后再次初始化</span></span><br><span class="line">    ucSnakeHead = <span class="number">4</span>;<span class="comment">//初始化蛇头为4，实际上是vSnakePoint[3];</span></span><br><span class="line">    ucSnakeTail = <span class="number">0</span>;<span class="comment">//初始化蛇尾为0</span></span><br><span class="line">    ucSnakekLen = <span class="number">4</span>;<span class="comment">//初始化蛇身长度为4</span></span><br><span class="line">    uiSnakeSpeed = SNAKESPEED;<span class="comment">//初始化蛇的速度为200ms</span></span><br><span class="line">    ptDirectHead = &#123; <span class="number">1</span>,<span class="number">0</span> &#125;;<span class="comment">//初始化蛇头方向</span></span><br><span class="line">    ptFood = &#123; <span class="number">20</span>,<span class="number">20</span> &#125;;<span class="comment">//初始化食物坐标</span></span><br><span class="line">    <span class="comment">//初始化每一节的蛇身坐标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vSnakePoint[i].x = i;</span><br><span class="line">        vSnakePoint[i].y = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置食物坐标</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SetFood</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    POINT ptNow = &#123;<span class="number">0</span>&#125;;<span class="comment">//新的食物坐标</span></span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        srand(time(<span class="number">0</span>));<span class="comment">//随机器种子</span></span><br><span class="line">        x = rand() % GAME_WIDE; <span class="comment">//设置食物随机坐标</span></span><br><span class="line">        y = rand() % GAME_HEIGHT;</span><br><span class="line">        <span class="keyword">for</span> ( i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ptNow = GetSnakeNode(i);</span><br><span class="line">            <span class="keyword">if</span> (ptNow.x == x &amp;&amp; ptNow.y == y)</span><br><span class="line">                <span class="keyword">break</span>;<span class="comment">//如果食物出现在蛇身，则重新设置食物</span></span><br><span class="line">        &#125;<span class="comment">//如果食物不在蛇身，就退出循环</span></span><br><span class="line">        <span class="keyword">if</span>(ucSnakekLen == i) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ptFood.x = x;</span><br><span class="line">    ptFood.y = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>画食物</p>
+<p>画食物也是在WM_PAINT消息中调用</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//画食物</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawFood</span><span class="params">(HWND hWnd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HDC hdc = GetDC(hWnd);</span><br><span class="line">    HBRUSH hBrush = CreateSolidBrush(RGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">    SelectObject(hdc, hBrush);</span><br><span class="line">     <span class="comment">//椭圆食物</span></span><br><span class="line">      Ellipse(hdc,BOUNDSIZE+ptFood.x*SNAKESIZE, BOUNDSIZE + ptFood.y*SNAKESIZE</span><br><span class="line">          , BOUNDSIZE + (ptFood.x + <span class="number">1</span>)*SNAKESIZE, BOUNDSIZE + (ptFood.y + <span class="number">1</span>)*SNAKESIZE);</span><br><span class="line">      ReleaseDC(hWnd, hdc);</span><br><span class="line">      DeleteObject(hBrush);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>5.让蛇吃食物<br>首先判断蛇是否吃到食物，只要蛇头坐标和食物坐标一样就可以吃到</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//判断是否吃到食物</span></span><br><span class="line"><span class="function">BOOL <span class="title">IsEat</span><span class="params">(POINT ptHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (ptHead.x == ptFood.x &amp;&amp; ptHead.y == ptFood.y)?TRUE:FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>6.吃食物后蛇身就增长<br>只要增长蛇头就可以了</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//增加蛇的长度</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddSnakeLen</span><span class="params">(POINT ptHead)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	    vSnakePoint[ucSnakeHead++] = ptHead;<span class="comment">//蛇头增长</span></span><br><span class="line">	    ucSnakekLen++;<span class="comment">//长度+1</span></span><br><span class="line">	    IsOverTake();<span class="comment">//判断是否超出范围</span></span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//判断是否超出范围</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">IsOverTake</span><span class="params">()</span> <span class="comment">//这个函数写在AddSnakeLen()前面，不然是未声明的标识符</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakeHead) ucSnakeHead = <span class="number">0</span>;   <span class="comment">//超出范围往返循环  </span></span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakeTail)    ucSnakeTail = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakekLen)   bIsWin = TRUE;<span class="comment">//赢了</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></code></pre><p>然后将这些小函数加入到SnakeMove()函数里</p>
+<p>效果图：<br><img src="https://img-blog.csdn.net/20151227152040401" alt></p>
+<p>吃到食物后，蛇身增长了，原来是4变成了5</p>
+<p>到这里游戏基本成型了，是不是很简单？难度主要在于蛇是如何移动的，这里需要好好思考，后面的就是设置开始、暂停按钮，是一些修修补补的问题了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-windows编程贪吃蛇移动问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
