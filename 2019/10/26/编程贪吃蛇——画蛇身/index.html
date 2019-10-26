@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>杨雯淇的博客</title>
+  <title>编程贪吃蛇——画蛇身 | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="杨雯淇的博客">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/index.html">
+  <meta name="description" content="上一篇是如何讲游戏区域画出来，接下来就是如何画出蛇身了画蛇身之前要初始化蛇身初始化要在WM_CREATE消息中初始化画蛇要在WM_PAINT消息中调用蛇的结点用动态数组容器vector来装 代码片段如下：    1#include &amp;lt;vector&amp;gt; //使用vector容器 12345678910111213141516171819202122232425262728293031323">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程贪吃蛇——画蛇身">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/10/26/编程贪吃蛇——画蛇身/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
+<meta property="og:description" content="上一篇是如何讲游戏区域画出来，接下来就是如何画出蛇身了画蛇身之前要初始化蛇身初始化要在WM_CREATE消息中初始化画蛇要在WM_PAINT消息中调用蛇的结点用动态数组容器vector来装 代码片段如下：    1#include &amp;lt;vector&amp;gt; //使用vector容器 12345678910111213141516171819202122232425262728293031323">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://img-blog.csdn.net/20151227142049743">
+<meta property="og:updated_time" content="2019-10-26T16:00:28.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨雯淇的博客">
+<meta name="twitter:title" content="编程贪吃蛇——画蛇身">
+<meta name="twitter:description" content="上一篇是如何讲游戏区域画出来，接下来就是如何画出蛇身了画蛇身之前要初始化蛇身初始化要在WM_CREATE消息中初始化画蛇要在WM_PAINT消息中调用蛇的结点用动态数组容器vector来装 代码片段如下：    1#include &amp;lt;vector&amp;gt; //使用vector容器 12345678910111213141516171819202122232425262728293031323">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20151227142049743">
   
     <link rel="alternative" href="/atom.xml" title="杨雯淇的博客" type="application/atom+xml">
   
@@ -157,16 +163,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="windows-编程贪吃蛇——画蛇身" class="article article-type-windows  article-index" itemscope itemprop="blogPost">
+            <article id="windows-编程贪吃蛇——画蛇身" class="article article-type-windows " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/26/编程贪吃蛇——画蛇身/">编程贪吃蛇——画蛇身</a>
+    <h1 class="article-title" itemprop="name">
+      编程贪吃蛇——画蛇身
     </h1>
   
 
@@ -197,6 +201,32 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -204,16 +234,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/26/编程贪吃蛇——画蛇身/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/10/26/编程贪吃蛇——画蛇身/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/26/创建窗口贪吃蛇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">创建窗口贪吃蛇</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -233,489 +322,14 @@
 
 
 
-
   
-    <article id="post-创建窗口贪吃蛇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/26/创建窗口贪吃蛇/">创建窗口贪吃蛇</a>
-    </h1>
   
 
-        
-        <a href="/2019/10/26/创建窗口贪吃蛇/" class="archive-article-date">
-  	<time datetime="2019-10-26T08:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近在学习windows编程，很想学以致用，前不久做了一个可以移动矩形的小项目，由此有了一个启发，是否可以做一个贪吃蛇的小游戏，结合网上大牛的代码，自己写一下代码，对知识有一点巩固，提高。</p>
-</blockquote>
-<p>我用Windows封装的API和c++来写这个小游戏，分成几个模块对代码进行讲解。有参考部分，有自己的简介部分。</p>
-<p>先说一下思路：</p>
-<p><em>游戏区部分</em></p>
-<p>1.画游戏区和控制区<br>可以实现自己手动控制游戏的进行，开始，暂停，加速，减速。分成两个界面很直观。<br>2.画出蛇身<br>窗口区域出现了就可以画蛇身了，要注意蛇身是一个一个矩形组成的。<br>3.让蛇动起来<br>蛇身画完就可以让蛇动起来，这是一个难点，但是不要用sleep函数，可以选择设置一个定时器，SetTimer函数，每隔多少ms就移动一次蛇身（这里我考虑是整体移动而不是一节一节移动，就是隔多少ms重新画一次蛇身）这里的间隔就是速度了。<br>4.制作食物<br>既然让蛇动起来了，就应该设置食物了，先考虑怎么制作食物。<br>5.让蛇吃食物<br>这里只是判断蛇吃没吃到食物，还不需要他增加长度<br>6.吃完食物增加长度<br>这里只需要调用第五个步骤判断，然后让他是否增长就行</p>
-<p><em>控制区部分</em></p>
-<p>7.开始和暂停按钮<br>8.蛇的速度按钮<br>9.游戏等级<br>10.时间计时<br>11.分数显示</p>
-<p>实战讲解：<br>1.画游戏区和控制区<br> 游戏区和控制区是相对独立的两个区，所以要有边界宽度来分割他们，然后游戏区和控制区和父窗口之间也要有分割，这样有整体的立体感。</p>
-<p> 代码片段如下：<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//游戏区和控制区宽度高度</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GAME_WIDE             70     <span class="comment">//游戏区宽度70*10</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GAME_HEIGHT           60     <span class="comment">//游戏区高度60*10</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  CTRL_WIDE             30     <span class="comment">//控制区宽度30*10</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  CTRL_HEIGHT           60     <span class="comment">//控制区高度60*10</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  BOUNDSIZE             10     <span class="comment">//边界厚度10   </span></span></span><br><span class="line"><span class="comment">//蛇的信息</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SNAKESIZE            10     <span class="comment">//蛇的宽高都为10的小方块</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SNAKEMAX            100     <span class="comment">//蛇身长度最大值为100</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SNAKESPEED          500     <span class="comment">//初始化蛇的速度为500ms</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   TIMERID_1             1     <span class="comment">//定时器ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   PAUSEID               1     <span class="comment">//暂停按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   STARTID               2     <span class="comment">//开始按钮ID </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDUPID             3     <span class="comment">//加速按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDDOWNID           4     <span class="comment">//减速按钮ID</span></span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;POINT&gt; vSnakePoint;       <span class="comment">//声明一个蛇的坐标</span></span><br><span class="line"></span><br><span class="line">UCHAR ucSnakeHead = <span class="number">4</span>;                <span class="comment">//初始化蛇头为4，实际上是vSnakePoint[3];</span></span><br><span class="line">UCHAR ucSnakeTail = <span class="number">0</span>;                <span class="comment">//初始化蛇尾为0</span></span><br><span class="line">UCHAR ucSnakekLen = <span class="number">4</span>;                <span class="comment">//初始化蛇身长度为4</span></span><br><span class="line">UINT uiSnakeSpeed = SNAKESPEED;       <span class="comment">//初始化蛇的速度为500ms</span></span><br><span class="line">UINT uiScore = <span class="number">0</span>;                     <span class="comment">//初始化分数为0</span></span><br><span class="line"></span><br><span class="line">POINT ptDirectHead = &#123; <span class="number">1</span>,<span class="number">0</span> &#125;;         <span class="comment">//蛇头的方向,初始化为向右</span></span><br><span class="line">POINT ptFood = &#123; <span class="number">20</span>,<span class="number">20</span> &#125;;             <span class="comment">//食物坐标</span></span><br><span class="line"></span><br><span class="line">BOOL bIsLoose = TRUE;                 <span class="comment">//判断是否输了</span></span><br><span class="line">BOOL bIsWin = FALSE;                  <span class="comment">//判断是否赢了</span></span><br><span class="line">BOOL bIsPause = FALSE;                <span class="comment">//判断是否暂停了</span></span><br><span class="line">BOOL bIsStart = FALSE;                <span class="comment">//判断是否开始了</span></span><br><span class="line">BOOL bFlagStart = FALSE;              <span class="comment">//判断是否能开始</span></span><br><span class="line"></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc</span><span class="params">(HWND, UINT, WPARAM, LPARAM)</span></span>;</span><br><span class="line"></span><br><span class="line">TCHAR szAppName[] = TEXT(<span class="string">"Snake"</span>);</span><br><span class="line">HINSTANCE hInst = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> WINAPI <span class="title">WinMain</span><span class="params">(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR szCmdLine, <span class="keyword">int</span> iCmdShow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	hInst = hInstance;</span><br><span class="line">	HWND     hwnd;</span><br><span class="line">	MSG      msg;</span><br><span class="line">	WNDCLASS wndclass;</span><br><span class="line">	wndclass.style = CS_HREDRAW | CS_VREDRAW;</span><br><span class="line">	wndclass.lpfnWndProc = WndProc;</span><br><span class="line">	wndclass.cbClsExtra = <span class="number">0</span>;</span><br><span class="line">	wndclass.cbWndExtra = <span class="number">0</span>;</span><br><span class="line">	wndclass.hInstance = hInstance;</span><br><span class="line">	wndclass.hIcon = LoadIcon(<span class="literal">NULL</span>, IDI_APPLICATION);</span><br><span class="line">	wndclass.hCursor = LoadCursor(<span class="literal">NULL</span>, IDC_ARROW);</span><br><span class="line">	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);</span><br><span class="line">	wndclass.lpszMenuName = <span class="literal">NULL</span>;</span><br><span class="line">	wndclass.lpszClassName = szAppName;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!RegisterClass(&amp;wndclass))</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(<span class="literal">NULL</span>, TEXT(<span class="string">"This program requires Windows NT!"</span>),</span><br><span class="line">			szAppName, MB_ICONERROR);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	hwnd = CreateWindow(szAppName, szAppName,</span><br><span class="line">		WS_OVERLAPPEDWINDOW,</span><br><span class="line">		CW_USEDEFAULT, CW_USEDEFAULT,</span><br><span class="line">		CW_USEDEFAULT, CW_USEDEFAULT,</span><br><span class="line">		<span class="literal">NULL</span>, <span class="literal">NULL</span>, hInstance, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	ShowWindow(hwnd, iCmdShow);</span><br><span class="line">	UpdateWindow(hwnd);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (GetMessage(&amp;msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		TranslateMessage(&amp;msg);</span><br><span class="line">		DispatchMessage(&amp;msg);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> msg.wParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc</span><span class="params">(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span></span>;</span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc</span><span class="params">(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	RECT rect = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span>  ixWind = <span class="number">0</span>, iyWind = <span class="number">0</span>;<span class="comment">//窗口大小参数</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> ixClient = <span class="number">0</span>, iyClient = <span class="number">0</span>;<span class="comment">//客户区大小参数</span></span><br><span class="line">	<span class="keyword">static</span> HWND  hPause = <span class="literal">nullptr</span>;<span class="comment">//暂停按钮句柄</span></span><br><span class="line">	<span class="keyword">static</span> HWND  hStart = <span class="literal">nullptr</span>;<span class="comment">//开始按钮句柄</span></span><br><span class="line">	<span class="keyword">static</span> HWND  hSpeedUp = <span class="literal">nullptr</span>;<span class="comment">//加速按钮句柄</span></span><br><span class="line">	<span class="keyword">static</span> HWND  hSpeedDown = <span class="literal">nullptr</span>;<span class="comment">//减速按钮句柄</span></span><br><span class="line">	DWORD dwError = <span class="number">0</span>;<span class="comment">//错误信息</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (message)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> WM_CREATE:</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//获取窗口大小</span></span><br><span class="line">		GetWindowRect(hwnd, &amp;rect);</span><br><span class="line">		ixWind = rect.right - rect.left;</span><br><span class="line">		iyWind = rect.bottom - rect.top;</span><br><span class="line">		<span class="comment">//获取客户区大小</span></span><br><span class="line">		GetClientRect(hwnd, &amp;rect);</span><br><span class="line">		ixClient = rect.right - rect.left;</span><br><span class="line">		iyClient = rect.bottom - rect.top;</span><br><span class="line">		<span class="comment">//修改窗口大小</span></span><br><span class="line">		<span class="keyword">int</span> nWideth = BOUNDSIZE * <span class="number">3</span> + (GAME_WIDE + CTRL_WIDE)*SNAKESIZE + (ixWind - ixClient);</span><br><span class="line">		<span class="keyword">int</span> nHeight = BOUNDSIZE * <span class="number">2</span> + GAME_HEIGHT * SNAKESIZE + (iyWind - iyClient);</span><br><span class="line">		MoveWindow(hwnd, <span class="number">50</span>, <span class="number">50</span>, nWideth, nHeight, TRUE);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">case</span> WM_PAINT:</span><br><span class="line">	&#123;</span><br><span class="line">		PAINTSTRUCT ps;</span><br><span class="line">		HDC hdc = BeginPaint(hwnd, &amp;ps);</span><br><span class="line">		<span class="keyword">static</span> HBRUSH hBrush1 = CreateSolidBrush(RGB(<span class="number">58</span>, <span class="number">206</span>, <span class="number">66</span>));</span><br><span class="line">		<span class="keyword">static</span> HBRUSH hBrush2 = CreateSolidBrush(RGB(<span class="number">80</span>, <span class="number">87</span>, <span class="number">196</span>));</span><br><span class="line"></span><br><span class="line">		<span class="comment">//画游戏区</span></span><br><span class="line">		Rectangle(hdc, BOUNDSIZE, BOUNDSIZE, BOUNDSIZE + GAME_WIDE * SNAKESIZE,</span><br><span class="line">			BOUNDSIZE + GAME_HEIGHT * SNAKESIZE);</span><br><span class="line">		<span class="comment">//填充游戏区颜色</span></span><br><span class="line">		SetRect(&amp;rect, BOUNDSIZE, BOUNDSIZE, BOUNDSIZE + GAME_WIDE * SNAKESIZE,</span><br><span class="line">			BOUNDSIZE + GAME_HEIGHT * SNAKESIZE);</span><br><span class="line">		FillRect(hdc, &amp;rect, hBrush1);</span><br><span class="line">		<span class="comment">//画控制区</span></span><br><span class="line">		Rectangle(hdc, BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE, BOUNDSIZE,</span><br><span class="line">			BOUNDSIZE * <span class="number">2</span> + (GAME_WIDE + CTRL_WIDE)*SNAKESIZE, BOUNDSIZE + CTRL_HEIGHT * SNAKESIZE);</span><br><span class="line">		<span class="comment">//填充控制区颜色</span></span><br><span class="line">		SetRect(&amp;rect, BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE, BOUNDSIZE,</span><br><span class="line">			BOUNDSIZE * <span class="number">2</span> + (GAME_WIDE + CTRL_WIDE)*SNAKESIZE,</span><br><span class="line">			BOUNDSIZE + CTRL_HEIGHT * SNAKESIZE);</span><br><span class="line">		FillRect(hdc, &amp;rect, hBrush2);</span><br><span class="line">		</span><br><span class="line">		EndPaint(hwnd, &amp;ps);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">		</span><br><span class="line">		PostQuitMessage(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">return</span> DefWindowProc(hwnd, message, wParam, lParam);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> DefWindowProc(hwnd, message, wParam, lParam);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>效果图如下所示：</p>
-<p><img src="https://img-blog.csdn.net/20151227140203718" alt></p>
-<p><font face="华文行楷" color="red" size="5">接着看下篇讲解如何绘画出蛇</font></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/26/创建窗口贪吃蛇/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-可靠的TCP和不可靠的IP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/可靠的TCP和不可靠的IP/">可靠的TCP和不可靠的IP</a>
-    </h1>
   
 
-        
-        <a href="/2019/10/25/可靠的TCP和不可靠的IP/" class="archive-article-date">
-  	<time datetime="2019-10-25T10:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>对《TCP/IP详解卷一》中“<strong>TCP在不可靠的IP层上提供一个可靠的传输层</strong>”这句话的理解。见下图：</p>
-</blockquote>
-<p><img src="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041" alt></p>
-<p>我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不清楚这个包裹内的东西是什么，他只用负责把这个包裹按照上面写的地址送到买家的手中（IP路由的过程）。由于网络层协议（IP）和快递一样不总是都靠谱，所以丢包是难免的。一旦出现丢包，长期没有收到快递的愤怒的买家就会找到卖家，倒霉的卖家只能把那部手机重新再发一次（一般快递都会推脱责任不予赔偿），这个过程就叫做TCP的超时重传。流着泪的卖家把新的包裹再次交给收件员，对于卖家而言这确实是再次。但是对于收件员而言，这只是一个普通的包裹，绝对不可能知道这是上次丢失包裹的一次重传。（这也是网络分层的目的，向下层隐藏上层的工作细节）。非常幸运的是，这次快递公司“不辱使命”成功完成了任务，把包裹交给了淘宝买家，买家对手机进行检查并且给卖家进行确认（TCP对数据的确认），本次会话结束。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/可靠的TCP和不可靠的IP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TCP-IP的比喻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/TCP-IP的比喻/">TCP/IP的比喻</a>
-    </h1>
   
 
-        
-        <a href="/2019/10/25/TCP-IP的比喻/" class="archive-article-date">
-  	<time datetime="2019-10-25T06:15:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近在学习<strong>TCP/IP</strong>，看了某博主的文章有了自己的一些见解。以下是<strong>TCP/IP</strong>分层示意图。博主用实际生活中的事物来比喻<strong>TCP/IP</strong>不同层的工作原理。  </p>
-</blockquote>
-<p><img src="http://m.qpic.cn/psb?/V13y9b4j2VssR0/9JMpxcKvOXoHMVIHYchi5KVTp2WprwehudAgVvqYfbU!/b/dL8AAAAAAAAA&bo=qQRMAwAAAAARB9I!&rf=viewer_4" alt><br><font color="red"><strong>应用层（FTP协议）：</strong></font><br><font face="微软雅黑">首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个主机（大厦）内可能有很多的应用程序（客户），我们如何区分他们呢？实际生活中我们用房间号，在电脑内部区分不同应用程序我们用端口号。<br></font><br><font color="red"><strong>传输层（TCP）：</strong></font><br><font face="微软雅黑">用户写好了信，需要给新套上信封，并且写好发件人所在的大厦，实际上生活中的大厦完全可以类比为我们的计算机和服务器。传输层（TCP）就是在两个不同主机之间传输信息的协议。<br></font><br><font color="red"><strong>网络层（IP）：</strong></font><br><font face="微软雅黑">邮件准备好了，他首先会被送到本城市的快递公司，并且被打包，包裹上会写着源是重庆快递公司，目的是沈阳快递公司，但是重庆快递公司发现它不能直接发送给沈阳快递公司，需要通过北京快递公司进行周转。所以虽然目的是沈阳，但是它首先把这个包裹发给北京。某个城市的快递公司就像IP协议，要抵达目的IP，就要查询路由表，如果发现目的地址不是直连就需要找下一跳。通过了解快递公司的工作，我们了解到IP协议是逐跳工作的。每一跳（路由器）根据目IP地址查询下一跳，并且最终转发到目的地。<br></font><br><font color="red"><strong>链路层（以太网）</strong></font><br><font face="微软雅黑">重庆快递公司已经知道他需要把包裹发给北京快递公司了，现在他就把包裹送到重庆火车站，搭上去往北京的火车，然后在北京火车站卸货。然后送到北京快递公司，北京快递公司再判断下一跳为沈阳快递公司，并且选择适当的传输方式，例如：汽车，最后通过这种传输方式送到目的地沈阳快递公司。链路层协议就像包裹的传输方式，我们可以选择以太网（火车），也可以选择令牌环（汽车）。并且链路层协议是逐介质的，从一个网卡（重庆火车站）到另一个网卡（北京火车站）。所以你会发现一个数据包从源到目的，IP地址总是不变的（源是重庆快递公司，目的是沈阳快递公司），但是链路层协议却在不断的变化，第一跳源是重庆火车站，目的是北京火车站，第二跳源是北京火车站，目的是沈阳汽车站。</font></p>
-<hr>
-<p><font color="purpul"><em>补充</em></font></p>
-<hr>
-<p><font face="微软雅黑">OSI（Open SystemInterconnection）开放式系统互联<br>七层模型：<br><strong>物理层</strong>、<strong>数据链路层</strong>、<strong>网络层</strong>、<strong>传输层</strong>、<strong>会话层</strong>、<strong>表示层</strong>、<strong>应用层</strong>。<br>以下是OSI参考模型：<br></font><br><img src="https://static.runoob.com/images/mix/v2-854e3df8ea850c977c30cb1deb1f64db_r.jpg" alt></p>
-<hr>
-<p><font color="green">物理层（Physical Layer)</font><br><font face="微软雅黑"><br>  作用：定义一些电器，机械，过程和规范，如集线器<br>  PDU（协议数据单元）：bit/比特;<br>  设备：集线器HUB；<br>  注意：没有寻址的概念；</font></p>
-
-
-
-<hr>
-<p><font color="green">数据链路层(Data Link Layer)</font><br><font face="微软雅黑"><br>作用：定义如何格式化数据，支持错误检测；<br>典型协议：以太网，帧中继（古董级VPN）<br>PDU：frame（帧）<br>设备：以太网交换机<br>备注：交换机通过MAC地址转发数据，逻辑链路控制；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">网络层(Network Layer)</font><br><font face="微软雅黑"><br>作用：定义一个逻辑的寻址,选择最佳路径传输,路由数据包；<br>典型协议：IP,IPX,ICMP,ARP(IP-&gt;MAC),IARP）<br>PDU：packet/数据包<br>设备：路由器<br>备注：实现寻址；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">传输层(Transport Layer)</font><br><font face="微软雅黑"><br>作用：提供可靠和尽力而为的传输；<br>典型协议：TCP,UDP,SPX,port(65535个端口)，EIGRP,OSPF<br>PDU：fragment段<br>无典型设备<br>备注：负责网路传输和会话建立；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">会话层( Session Layer)</font><br><font face="微软雅黑"><br>作用：控制会话，建立管理终止应用程序会话；<br>典型协议：<br>PDU：NFS,SQL,ASP,PHP,JSP,RSVP(Resource Reservation Protocol资源预留协议),windows<br>备注：负责会话建立；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">表示层(Presentation Layer)</font><br><font face="微软雅黑"><br>作用：格式化数据；<br>典型协议：ASCII,JPEG,PNG,MP3,WAV,AVI<br>备注：可以提供加密服务；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">应用层(Application Layer)</font><br><font face="微软雅黑"><br>作用：控制应用程序；<br>典型协议：telnet,ssh,http,ftp,smtp,rip,BGP,(未完待续)<br>备注：为应用程序提供网络服务；</font></p>
-
-
-
-
-<hr>
-<p>Q:什么时候有PDU?<br>A：当需要跟别人通信时候才有。</p>
-<hr>
-<p><em>OSI是一种接近完美的理论，注意这种模型只出现在教科书里，这种模型是在TCP/IP协议已经成熟之后提出来的，可以理解为升级版。但是并没有流行起来，主要有以下几个原因！</em></p>
-<p>1.出现时间较晚。<br>2.掺杂了太多政策考量，并没有单独从技术角度出发<br>3.其他一些原因。。。。<br><font color="red"><strong>所以网络数据传输是TCP/IP的天下!</strong></font></p>
-<hr>
-<p>TCP/IP协议是一大堆协议的集合，TCP/IP协议分为四层（也就是数据传输一次主要经历以下4个步骤），分别是从上到下为：应用层，传输层，Internet，物理层。</p>
-<p>假如你给你的基友发一个消息，数据开始传输，这时数据就要遵循TCP/IP协议啦，你的电脑会做出以下动作，这些动作你是看不到的。<br>1、应用层先把你的消息给表示层进行格式转换,你的消息是文字还是图片，还是成人视频并进行加密等操作交给传输层。（这时的数据单元（单位）是信息）<br>2、传输层将数据切割成一段一段的，便与传输并往里加上一些标记，比如当前应用的端口号等，交给Internet。（这时的数据单元（单位）是数据流）<br>3、Internet开始在将数据进行分组，分组头部包含目标地址的IP及一些相关信息交给物理层。（这时的数据单元（单位）是分组）<br>4、物理层将数据转换为比特流开始查找主机真实物理地址进行校验等操作，校验通过，开始嗖<del>嗖</del>嗖~的住目的地跑。（这时的数据单元（单位）是比特）<br>到达目的地后，对方设备会将上面的顺序反向的操作一遍，最后呈现出来。</p>
-<p>个人感觉已经通俗易懂啦！这些东西都都理论知识，属于基础建设，前辈们都已经帮我们铺好路啦。</p>
-<p><font color="red"><em>附上老师制作的一张图片帮助我加深理解</em></font></p>
-<p><img src="http://m.qpic.cn/psb?/V13y9b4j2VssR0/YFEuD.Z3Zy4jNcL7RIMFuhAH1d.FZkeIplYK3GFPm3g!/b/dL4AAAAAAAAA&bo=hQRGAgAAAAADB.c!&rf=viewer_4" alt></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/TCP-IP的比喻/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="hexo-我第一次学习使用MarkDown语法" class="article article-type-hexo  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/19/我第一次学习使用MarkDown语法/">我第一次学习使用MarkDown语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/19/我第一次学习使用MarkDown语法/" class="archive-article-date">
-  	<time datetime="2019-10-19T06:21:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><blockquote>
-<p>这个就是引用</p>
-</blockquote>
-<hr>
-<p><em>斜体</em><br><strong>加粗</strong><br><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2455705934,1350898646&fm=26&gp=0.jpg" alt="这是鼠标放上面显示的文字"><br><a href="http://www.baidu.com" target="_blank" rel="noopener">百度</a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>列表</li>
-<li>列表</li>
-<li>列表</li>
-<li>列表</li>
-</ul>
-<p>1.列表<br>2.列表<br>3.列表<br>4.列表</p>
-<table>
-<thead>
-<tr>
-<th align="center">表头</th>
-<th align="left">表头</th>
-<th align="right">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">内容</td>
-<td align="left">内容</td>
-<td align="right">内容</td>
-</tr>
-</tbody></table>
-<p><del>这是加删除线的文字</del></p>
-<h1 id="我想在文字中加那些-gt-嘿嘿"><a href="#我想在文字中加那些-gt-嘿嘿" class="headerlink" title="我想在文字中加那些&gt;嘿嘿"></a>我想在文字中加那些&gt;嘿嘿</h1>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/19/我第一次学习使用MarkDown语法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: 我的第一篇博客文章<br>data: 2019-02-19 12:40:58<br>tags:</p>
-<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/30/我的第一篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/30/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/30/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-30T02:30:55.249Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/30/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -738,8 +352,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
