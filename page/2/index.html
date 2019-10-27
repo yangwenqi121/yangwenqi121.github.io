@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 13
+    总文章数 14
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,128 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-TCP-IP的比喻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/25/TCP-IP的比喻/">TCP/IP的比喻</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/25/TCP-IP的比喻/" class="archive-article-date">
+  	<time datetime="2019-10-25T06:15:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近在学习<strong>TCP/IP</strong>，看了某博主的文章有了自己的一些见解。以下是<strong>TCP/IP</strong>分层示意图。博主用实际生活中的事物来比喻<strong>TCP/IP</strong>不同层的工作原理。  </p>
+</blockquote>
+<p><img src="http://s3.sinaimg.cn/orignal/52ddfea3t998861108572" alt><br><font color="red"><strong>应用层（FTP协议）：</strong></font><br><font face="微软雅黑">首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个主机（大厦）内可能有很多的应用程序（客户），我们如何区分他们呢？实际生活中我们用房间号，在电脑内部区分不同应用程序我们用端口号。<br></font><br><font color="red"><strong>传输层（TCP）：</strong></font><br><font face="微软雅黑">用户写好了信，需要给新套上信封，并且写好发件人所在的大厦，实际上生活中的大厦完全可以类比为我们的计算机和服务器。传输层（TCP）就是在两个不同主机之间传输信息的协议。<br></font><br><font color="red"><strong>网络层（IP）：</strong></font><br><font face="微软雅黑">邮件准备好了，他首先会被送到本城市的快递公司，并且被打包，包裹上会写着源是重庆快递公司，目的是沈阳快递公司，但是重庆快递公司发现它不能直接发送给沈阳快递公司，需要通过北京快递公司进行周转。所以虽然目的是沈阳，但是它首先把这个包裹发给北京。某个城市的快递公司就像IP协议，要抵达目的IP，就要查询路由表，如果发现目的地址不是直连就需要找下一跳。通过了解快递公司的工作，我们了解到IP协议是逐跳工作的。每一跳（路由器）根据目IP地址查询下一跳，并且最终转发到目的地。<br></font><br><font color="red"><strong>链路层（以太网）</strong></font><br><font face="微软雅黑">重庆快递公司已经知道他需要把包裹发给北京快递公司了，现在他就把包裹送到重庆火车站，搭上去往北京的火车，然后在北京火车站卸货。然后送到北京快递公司，北京快递公司再判断下一跳为沈阳快递公司，并且选择适当的传输方式，例如：汽车，最后通过这种传输方式送到目的地沈阳快递公司。链路层协议就像包裹的传输方式，我们可以选择以太网（火车），也可以选择令牌环（汽车）。并且链路层协议是逐介质的，从一个网卡（重庆火车站）到另一个网卡（北京火车站）。所以你会发现一个数据包从源到目的，IP地址总是不变的（源是重庆快递公司，目的是沈阳快递公司），但是链路层协议却在不断的变化，第一跳源是重庆火车站，目的是北京火车站，第二跳源是北京火车站，目的是沈阳汽车站。</font></p>
+<hr>
+<p><font color="purpul"><em>补充</em></font></p>
+<hr>
+<p><font face="微软雅黑">OSI（Open SystemInterconnection）开放式系统互联<br>七层模型：<br><strong>物理层</strong>、<strong>数据链路层</strong>、<strong>网络层</strong>、<strong>传输层</strong>、<strong>会话层</strong>、<strong>表示层</strong>、<strong>应用层</strong>。<br>以下是OSI参考模型：<br></font><br><img src="https://static.runoob.com/images/mix/v2-854e3df8ea850c977c30cb1deb1f64db_r.jpg" alt></p>
+<hr>
+<p><font color="green">物理层（Physical Layer)</font><br><font face="微软雅黑"><br>  作用：定义一些电器，机械，过程和规范，如集线器<br>  PDU（协议数据单元）：bit/比特;<br>  设备：集线器HUB；<br>  注意：没有寻址的概念；</font></p>
+
+
+
+<hr>
+<p><font color="green">数据链路层(Data Link Layer)</font><br><font face="微软雅黑"><br>作用：定义如何格式化数据，支持错误检测；<br>典型协议：以太网，帧中继（古董级VPN）<br>PDU：frame（帧）<br>设备：以太网交换机<br>备注：交换机通过MAC地址转发数据，逻辑链路控制；</font></p>
+
+
+
+
+<hr>
+<p><font color="green">网络层(Network Layer)</font><br><font face="微软雅黑"><br>作用：定义一个逻辑的寻址,选择最佳路径传输,路由数据包；<br>典型协议：IP,IPX,ICMP,ARP(IP-&gt;MAC),IARP）<br>PDU：packet/数据包<br>设备：路由器<br>备注：实现寻址；</font></p>
+
+
+
+
+<hr>
+<p><font color="green">传输层(Transport Layer)</font><br><font face="微软雅黑"><br>作用：提供可靠和尽力而为的传输；<br>典型协议：TCP,UDP,SPX,port(65535个端口)，EIGRP,OSPF<br>PDU：fragment段<br>无典型设备<br>备注：负责网路传输和会话建立；</font></p>
+
+
+
+
+<hr>
+<p><font color="green">会话层( Session Layer)</font><br><font face="微软雅黑"><br>作用：控制会话，建立管理终止应用程序会话；<br>典型协议：<br>PDU：NFS,SQL,ASP,PHP,JSP,RSVP(Resource Reservation Protocol资源预留协议),windows<br>备注：负责会话建立；</font></p>
+
+
+
+
+<hr>
+<p><font color="green">表示层(Presentation Layer)</font><br><font face="微软雅黑"><br>作用：格式化数据；<br>典型协议：ASCII,JPEG,PNG,MP3,WAV,AVI<br>备注：可以提供加密服务；</font></p>
+
+
+
+
+<hr>
+<p><font color="green">应用层(Application Layer)</font><br><font face="微软雅黑"><br>作用：控制应用程序；<br>典型协议：telnet,ssh,http,ftp,smtp,rip,BGP,(未完待续)<br>备注：为应用程序提供网络服务；</font></p>
+
+
+
+
+<hr>
+<p>Q:什么时候有PDU?<br>A：当需要跟别人通信时候才有。</p>
+<hr>
+<p><em>OSI是一种接近完美的理论，注意这种模型只出现在教科书里，这种模型是在TCP/IP协议已经成熟之后提出来的，可以理解为升级版。但是并没有流行起来，主要有以下几个原因！</em></p>
+<p>1.出现时间较晚。<br>2.掺杂了太多政策考量，并没有单独从技术角度出发<br>3.其他一些原因。。。。<br><font color="red"><strong>所以网络数据传输是TCP/IP的天下!</strong></font></p>
+<hr>
+<p>TCP/IP协议是一大堆协议的集合，TCP/IP协议分为四层（也就是数据传输一次主要经历以下4个步骤），分别是从上到下为：应用层，传输层，Internet，物理层。</p>
+<p>假如你给你的基友发一个消息，数据开始传输，这时数据就要遵循TCP/IP协议啦，你的电脑会做出以下动作，这些动作你是看不到的。<br>1、应用层先把你的消息给表示层进行格式转换,你的消息是文字还是图片，还是成人视频并进行加密等操作交给传输层。（这时的数据单元（单位）是信息）<br>2、传输层将数据切割成一段一段的，便与传输并往里加上一些标记，比如当前应用的端口号等，交给Internet。（这时的数据单元（单位）是数据流）<br>3、Internet开始在将数据进行分组，分组头部包含目标地址的IP及一些相关信息交给物理层。（这时的数据单元（单位）是分组）<br>4、物理层将数据转换为比特流开始查找主机真实物理地址进行校验等操作，校验通过，开始嗖<del>嗖</del>嗖~的住目的地跑。（这时的数据单元（单位）是比特）<br>到达目的地后，对方设备会将上面的顺序反向的操作一遍，最后呈现出来。</p>
+<p>个人感觉已经通俗易懂啦！这些东西都都理论知识，属于基础建设，前辈们都已经帮我们铺好路啦。</p>
+<p><font color="red"><em>附上老师制作的一张图片帮助我加深理解</em></font></p>
+<p><img src="http://a3.qpic.cn/psb?/V13y9b4j2VssR0/YFEuD.Z3Zy4jNcL7RIMFuhAH1d.FZkeIplYK3GFPm3g!/b/dL4AAAAAAAAA&ek=1&kp=1&pt=0&bo=hQRGAgAAAAADJ8c!&tl=1&vuin=1783758872&tm=1572116400&sce=60-1-1&rf=viewer_4" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/25/TCP-IP的比喻/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="hexo-我第一次学习使用MarkDown语法" class="article article-type-hexo  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
