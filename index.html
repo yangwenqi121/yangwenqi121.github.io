@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 12
+    总文章数 13
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,84 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-黄金矿工小游戏（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/黄金矿工小游戏（二）/">黄金矿工小游戏（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/27/黄金矿工小游戏（二）/" class="archive-article-date">
+  	<time datetime="2019-10-27T12:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>上一篇我们把窗口实现了，这次我们讲解如何把图片加载进去，并且实现图片对象来回走动。</p>
+</blockquote>
+<p>代码如下：</p>
+<p>Avatar.h 新增代码<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="comment">//	incomplete types...</span></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">IWICImagingFactory</span>;</span> <span class="comment">//图片工厂不完全类</span></span><br></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">initialize</span><span class="params">(ID2D1HwndRenderTarget* renderTarget)</span></span>; /初始化里添加renderTarget参数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">/* for the format of image converting... */</span></span><br><span class="line">	IWICImagingFactory * _pWicImgFactory = <span class="literal">nullptr</span>;</span><br><span class="line">	ID2D1Bitmap*			_pBitmap = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure></code></pre><p>Avatar.cpp initialize 和 render函数</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">bool</span> game::Avatar::initialize(ID2D1HwndRenderTarget* renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/* creates format convector factory. */</span></span><br><span class="line">	HRESULT hResult = ::CoCreateInstance(</span><br><span class="line">		CLSID_WICImagingFactory,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		CLSCTX_INPROC_SERVER,</span><br><span class="line">		IID_IWICImagingFactory,</span><br><span class="line">		(<span class="keyword">void</span>**)&amp;_pWicImgFactory);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* interfaces for image decoding... */</span></span><br><span class="line">	IWICBitmapDecoder* pDecoder = <span class="literal">nullptr</span>;</span><br><span class="line">	IWICBitmapFrameDecode* pSource = <span class="literal">nullptr</span>;</span><br><span class="line">	IWICFormatConverter* pConverter = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	hResult = _pWicImgFactory-&gt;CreateDecoderFromFilename(</span><br><span class="line">		<span class="string">L"Flyfish_Logo_Yellow.png"</span>,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		GENERIC_READ,</span><br><span class="line">		WICDecodeMetadataCacheOnLoad,</span><br><span class="line">		&amp;pDecoder);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create the initial frame. */</span></span><br><span class="line">	hResult = pDecoder-&gt;GetFrame(<span class="number">0</span>, &amp;pSource);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	hResult = _pWicImgFactory-&gt;CreateFormatConverter(&amp;pConverter);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	hResult = pConverter-&gt;Initialize(</span><br><span class="line">		pSource,</span><br><span class="line">		GUID_WICPixelFormat32bppPBGRA,</span><br><span class="line">		WICBitmapDitherTypeNone,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		<span class="number">0.0f</span>,</span><br><span class="line">		WICBitmapPaletteTypeMedianCut);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* creates a D2D bitmap from the WIC bitmap. */</span></span><br><span class="line">	hResult = renderTarget-&gt;CreateBitmapFromWicBitmap(</span><br><span class="line">		pConverter,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		&amp;_pBitmap);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	pConverter-&gt;Release();</span><br><span class="line">	pDecoder-&gt;Release();</span><br><span class="line">	_pWicImgFactory-&gt;Release();</span><br><span class="line">	pSource-&gt;Release();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//------------------------------------------------------------------</span></span><br><span class="line"> <span class="keyword">void</span> </span><br><span class="line">game::Avatar::render(ID2D1HwndRenderTarget* renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">		<span class="comment">// draw fish.</span></span><br><span class="line">		D2D1_SIZE_F size = renderTarget-&gt;GetSize();</span><br><span class="line">		D2D1_RECT_F rect;</span><br><span class="line">		rect.left = <span class="number">0.0f</span>;</span><br><span class="line">		rect.top = <span class="number">0.0f</span>;</span><br><span class="line">		rect.bottom = _pBitmap-&gt;GetSize().height / <span class="number">2.0f</span>;</span><br><span class="line">		rect.right = _pBitmap-&gt;GetSize().width / <span class="number">2.0f</span>;</span><br><span class="line">		renderTarget-&gt;DrawBitmap(</span><br><span class="line">			_pBitmap,</span><br><span class="line">			&amp;rect,</span><br><span class="line">			<span class="number">1.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>Game.cpp  frame 函数里面</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// render stuffs here...</span></span><br><span class="line">	<span class="keyword">if</span> (_avatar)</span><br><span class="line">		_avatar-&gt;render(_renderTarget);</span><br></pre></td></tr></table></figure></code></pre><p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/*fejNd2mbDdF1wHsRiaxHa9FpVqQq1wpBZzhYvwlRfw!/b/dFMBAAAAAAAA&bo=rgY4BAAAAAADB7Y!&rf=viewer_4" alt></p>
+<p>接下来让鱼动起来 用到update函数</p>
+<p>Avatar.h 增加代码：<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ID2D1HwndRenderTarget* renderTarget)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">int</span>                     _avatar_x = <span class="number">0</span>; <span class="comment">//图片起始位置</span></span><br><span class="line">	<span class="comment">/*true -&gt;</span></span><br><span class="line"><span class="comment">	false  &lt;-*/</span></span><br><span class="line">	<span class="keyword">bool</span>                   _bOrientation = <span class="literal">true</span>; <span class="comment">//定义向右为true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>Avatar.cpp  update函数实现逻辑部分</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">game::Avatar::update(ID2D1HwndRenderTarget* renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//get the geometry size of client screen.</span></span><br><span class="line">	<span class="keyword">auto</span> size = renderTarget-&gt;GetSize();</span><br><span class="line">	_avatar_x += <span class="number">1</span>;</span><br><span class="line">	<span class="comment">/*-&gt;*/</span></span><br><span class="line">	<span class="keyword">if</span> (_bOrientation)</span><br><span class="line">	&#123;</span><br><span class="line">		_avatar_x += <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (_avatar_x+_pBitmap-&gt;GetSize().width/<span class="number">2</span>&gt;=size.width)</span><br><span class="line">		&#123;</span><br><span class="line">			_bOrientation = !_bOrientation;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*&lt;-*/</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		_avatar_x -= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (_avatar_x &lt;=<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			_bOrientation = !_bOrientation;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//render函数里面修改代码</span></span><br><span class="line">rect.left = _avatar_x; <span class="comment">//原来的0.0f修改成了变量</span></span><br><span class="line">rect.top = <span class="number">0.0f</span>;</span><br><span class="line">rect.bottom = _pBitmap-&gt;GetSize().height / <span class="number">2.0f</span>;</span><br><span class="line">rect.right = _avatar_x+_pBitmap-&gt;GetSize().width / <span class="number">2.0f</span>; <span class="comment">//每次加上自己的起始位置，实现鱼位置的改变，不然会转圈拉伸，出现意外</span></span><br></pre></td></tr></table></figure></code></pre><p>Game.cpp  在画图之前先update</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//update stuff</span></span><br><span class="line">	<span class="keyword">if</span> (_avatar)</span><br><span class="line">		_avatar-&gt;update(_renderTarget);</span><br><span class="line"></span><br><span class="line">	_renderTarget-&gt;BeginDraw();</span><br><span class="line">	_renderTarget-&gt;Clear(D2D1::ColorF(<span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>));</span><br><span class="line">	_renderTarget-&gt;SetTransform(D2D1::Matrix3x2F::Identity());</span><br></pre></td></tr></table></figure></code></pre><p>效果图：</p>
+<p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/Gc.*9iTu7NBnnNwbRKaNJPdD6Lfys8YAe0MEdRcs3qk!/b/dFIBAAAAAAAA&bo=rgY4BAAAAAABF6Q!&rf=viewer_4" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/27/黄金矿工小游戏（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-黄金矿工小游戏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -839,97 +917,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/25/TCP-IP的比喻/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="hexo-我第一次学习使用MarkDown语法" class="article article-type-hexo  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/19/我第一次学习使用MarkDown语法/">我第一次学习使用MarkDown语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/19/我第一次学习使用MarkDown语法/" class="archive-article-date">
-  	<time datetime="2019-10-19T06:21:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><blockquote>
-<p>这个就是引用</p>
-</blockquote>
-<hr>
-<p><em>斜体</em><br><strong>加粗</strong><br><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2455705934,1350898646&fm=26&gp=0.jpg" alt="这是鼠标放上面显示的文字"><br><a href="http://www.baidu.com" target="_blank" rel="noopener">百度</a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>列表</li>
-<li>列表</li>
-<li>列表</li>
-<li>列表</li>
-</ul>
-<p>1.列表<br>2.列表<br>3.列表<br>4.列表</p>
-<table>
-<thead>
-<tr>
-<th align="center">表头</th>
-<th align="left">表头</th>
-<th align="right">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">内容</td>
-<td align="left">内容</td>
-<td align="right">内容</td>
-</tr>
-</tbody></table>
-<p><del>这是加删除线的文字</del></p>
-<h1 id="我想在文字中加那些-gt-嘿嘿"><a href="#我想在文字中加那些-gt-嘿嘿" class="headerlink" title="我想在文字中加那些&gt;嘿嘿"></a>我想在文字中加那些&gt;嘿嘿</h1>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/19/我第一次学习使用MarkDown语法/">展开全文 >></a>
         </p>
       
 
