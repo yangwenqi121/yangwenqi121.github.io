@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>Archives: 2019/10 | 杨雯淇的博客</title>
+  <title>黄金矿工小游戏实现计分逻辑部分 | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="杨雯淇的博客">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/archives/2019/10/index.html">
+  <meta name="description" content="今天实现计分的功能，需要用到观察者（Observer）模式。。。观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)  分析图： IListener.h 123456789101112131415161718192021222324252627282930313233343536//-----------------------------">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黄金矿工小游戏实现计分逻辑部分">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/10/30/黄金矿工小游戏实现计分逻辑部分/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
+<meta property="og:description" content="今天实现计分的功能，需要用到观察者（Observer）模式。。。观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)  分析图： IListener.h 123456789101112131415161718192021222324252627282930313233343536//-----------------------------">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/NYqt79N5ZwiaovHZcx9hl9aY6LCZJitVBlHp5Gb39DE!/b/dMMAAAAAAAAA&bo=wQWIAgAAAAADB2w!&rf=viewer_4">
+<meta property="og:updated_time" content="2019-10-30T12:01:32.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨雯淇的博客">
+<meta name="twitter:title" content="黄金矿工小游戏实现计分逻辑部分">
+<meta name="twitter:description" content="今天实现计分的功能，需要用到观察者（Observer）模式。。。观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)  分析图： IListener.h 123456789101112131415161718192021222324252627282930313233343536//-----------------------------">
+<meta name="twitter:image" content="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/NYqt79N5ZwiaovHZcx9hl9aY6LCZJitVBlHp5Gb39DE!/b/dMMAAAAAAAAA&bo=wQWIAgAAAAADB2w!&rf=viewer_4">
   
     <link rel="alternative" href="/atom.xml" title="杨雯淇的博客" type="application/atom+xml">
   
@@ -157,295 +163,176 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-黄金矿工小游戏实现计分逻辑部分" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      黄金矿工小游戏实现计分逻辑部分
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/" class="archive-article-date">
+
+        
+        <a href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/" class="archive-article-date">
   	<time datetime="2019-10-30T11:27:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/">黄金矿工小游戏实现计分逻辑部分</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>今天实现计分的功能，需要用到观察者（Observer）模式。。。<br>观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)</p>
+</blockquote>
+<p>分析图：<br><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/NYqt79N5ZwiaovHZcx9hl9aY6LCZJitVBlHp5Gb39DE!/b/dMMAAAAAAAAA&bo=wQWIAgAAAAADB2w!&rf=viewer_4" alt></p>
+<p>IListener.h</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//IListener.h   </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//headers</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Types.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ILISTENER_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ILISTENER_H</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">IListener</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">on_update</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			MessageType mt,</span></span></span><br><span class="line"><span class="function"><span class="params">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;MsgArgument<span class="comment">/*基本类型*/</span>&gt; args)</span></span>=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//------------------------------------------</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_ILISTENER_H</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure></code></pre><p>Type.h<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//Types.h   </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _TYPES_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _TYPES_H</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageType</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		MT_SCORE=<span class="number">0</span>,</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">MsgArgument</span> </span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		MessageType _msg_type;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_TYPES_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure></p>
+<p>由于MsgArgument是一个基本类型，所以需要提供一个具体类型 ConcreteArgument类型提供不同的消息</p>
+<p>ConcreteArgument.hpp<br><em>注</em>：hpp指的是没有实现文件，一些头文件和实现都包含在里面</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//ConcreteArguments.hpp  </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Types.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _CONCRETEARGUMENTS_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CONCRETEARGUMENTS_H</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="comment">//types of score.</span></span><br><span class="line">    <span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">ScoreType</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		ST_Increase=<span class="number">0</span>,</span><br><span class="line">		ST_Decrease,</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ScoreArg</span> :</span> <span class="keyword">public</span> MsgArgument</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		ScoreType _score_type;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_CONCRETEARGUMENTS_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure></code></pre><p>ISubject.h</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//ISubject.h   </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ISUBJECT_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ISUBJECT_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"IListener.h"</span></span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ISubject</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">add_listener</span><span class="params">(MessageType mt, IListener* listener)</span></span>=<span class="number">0</span>;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">remove_listener</span><span class="params">(MessageType mt, IListener* listener)</span> </span>= <span class="number">0</span>;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">(MessageType mt)</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_ISUBJECT_H</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure></code></pre><p>Avatar.h 增加代码<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Listener_Remove</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Listener_Remove(game::IListener* listener);</span><br><span class="line">		<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(game::IListener* listener)</span></span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		game::IListener* _listener;</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line">		<span class="comment">//inherited from ISubject.</span></span><br><span class="line">		<span class="comment">//-------------------------------------------------</span></span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">add_listener</span><span class="params">(MessageType mt, IListener* listener)</span>final</span>;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">remove_listener</span><span class="params">(MessageType mt, IListener* listener)</span> final</span>;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">(MessageType mt)</span> final</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;MessageType,<span class="built_in">std</span>::<span class="built_in">list</span>&lt;IListener*&gt;&gt;_listeners;</span><br><span class="line">		<span class="keyword">bool</span>                    _is_inCrease=<span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Avatar.cpp</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line">game::Listener_Remove::Listener_Remove(game::IListener * listener)</span><br><span class="line">&#123;</span><br><span class="line">	_listener = listener;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="keyword">bool</span> game::Listener_Remove::<span class="keyword">operator</span>()(game::IListener * listener)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> _listener == listener;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//launched state函数中</span></span><br><span class="line"><span class="keyword">if</span> (_isComingBack)</span><br><span class="line">			&#123;</span><br><span class="line">				_is_inCrease = <span class="literal">true</span>;</span><br><span class="line">				notify(MessageType::MT_SCORE);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//h文件中几个函数的实现</span></span><br><span class="line"><span class="keyword">void</span> game::Avatar::add_listener(MessageType mt, IListener * listener)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (!listener)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	_listeners[mt].emplace_back(listener);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> game::Avatar::remove_listener(MessageType mt, IListener * listener)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (!listener)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">auto</span> it = _listeners.find(mt);</span><br><span class="line">	<span class="keyword">if</span> (it == _listeners.end())</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="function">Listener_Remove <span class="title">lr</span><span class="params">(listener)</span></span>;</span><br><span class="line">	<span class="comment">//插入队列后边</span></span><br><span class="line">	<span class="keyword">auto</span> rm_it=<span class="built_in">std</span>::remove_if(</span><br><span class="line">		it-&gt;second.begin(),</span><br><span class="line">		it-&gt;second.end(),</span><br><span class="line">		lr);</span><br><span class="line">	<span class="keyword">while</span> (rm_it!=it-&gt;second.end())</span><br><span class="line">	&#123;</span><br><span class="line">		rm_it =it-&gt;second.erase(rm_it);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> game::Avatar::notify(MessageType mt)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">auto</span> it = _listeners.find(mt);</span><br><span class="line">	<span class="keyword">if</span> (it == _listeners.end())</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;ScoreArg&gt; sa(<span class="keyword">new</span> ScoreArg);</span><br><span class="line">	sa-&gt;_msg_type = MessageType::MT_SCORE;</span><br><span class="line">	sa-&gt;_score_type = _is_inCrease ? ScoreType::ST_Increase : ScoreType::ST_Decrease;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;item : it-&gt;second)</span><br><span class="line">		item-&gt;on_update(mt, </span><br><span class="line">			<span class="built_in">std</span>::static_pointer_cast&lt;MsgArgument&gt;(sa)</span><br><span class="line">		);<span class="comment">//最后一个人放弃他时，在堆上析构掉</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>ScoreManager.h</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//ScoreMgr.h   </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _SCOREMGR_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _SCOREMGR_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"IListener.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ScoreMgr</span>:</span><span class="keyword">public</span> IListener</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		ScoreMgr();</span><br><span class="line">		~ScoreMgr();</span><br><span class="line">		<span class="comment">//------------------------------------------</span></span><br><span class="line">		<span class="comment">// inherited from Ilistener</span></span><br><span class="line">		<span class="comment">//------------------------------------------</span></span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">on_update</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			MessageType mt,</span></span></span><br><span class="line"><span class="function"><span class="params">			<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;MsgArgument&gt; args)</span> override</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//------------------------------------------</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span>               _score = <span class="number">0</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//------------------------------------------</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_SCOREMGR_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure></code></pre><p>ScoreManager.cpp</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"><span class="comment">//ScoreMgr.cpp   </span></span><br><span class="line"><span class="comment">//10/27/2019   created</span></span><br><span class="line"><span class="comment">//10/27/2019   modified</span></span><br><span class="line"><span class="comment">//10/27/2019   bu yangwenqi</span></span><br><span class="line"><span class="comment">//------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ScoreManager.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ConcreteArguments.hpp"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">game::ScoreMgr::ScoreMgr()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">game::ScoreMgr::~ScoreMgr()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> game::ScoreMgr::on_update(MessageType mt, <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;MsgArgument&gt; args)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (mt!= MessageType::MT_SCORE)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">auto</span> score_arg = <span class="built_in">std</span>::static_pointer_cast&lt;ScoreArg&gt;(args);</span><br><span class="line">	<span class="keyword">if</span> (!score_arg)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (score_arg-&gt;_score_type == ScoreType::ST_Increase)</span><br><span class="line">		_score += <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		_score -= <span class="number">100</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>Game.h<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;ScoreMgr&gt; _score_mgr;</span><br></pre></td></tr></table></figure></p>
+<p>Game.cpp<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//initialize score manager</span></span><br><span class="line">	_avatar-&gt;add_listener(MessageType::MT_SCORE,</span><br><span class="line">		&amp;*_score_mgr);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
+<p>好了！逻辑部分实现了，至于如何将其展现在屏幕上，就是一些技术部分了，暂且先不说，后续会给加上的！</p>
+<p>未完待续。。。。。。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/10/30/黄金矿工小游戏实现计分逻辑部分/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/28/黄金矿工小游戏（四）/" class="archive-article-date">
-  	<time datetime="2019-10-27T16:30:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/28/黄金矿工小游戏（四）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">黄金矿工小游戏（四）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/28/黄金矿工小游戏（四）/">黄金矿工小游戏（四）</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/黄金矿工小游戏（三）/" class="archive-article-date">
-  	<time datetime="2019-10-27T13:18:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/黄金矿工小游戏（三）/">黄金矿工小游戏（三）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/黄金矿工小游戏（二）/" class="archive-article-date">
-  	<time datetime="2019-10-27T12:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/黄金矿工小游戏（二）/">黄金矿工小游戏（二）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/黄金矿工小游戏/" class="archive-article-date">
-  	<time datetime="2019-10-27T10:26:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/黄金矿工小游戏/">黄金矿工小游戏</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/windows编程贪吃蛇——按钮的触发机制和子窗口/" class="archive-article-date">
-  	<time datetime="2019-10-26T18:09:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/windows编程贪吃蛇——按钮的触发机制和子窗口/">windows编程贪吃蛇——按钮的触发机制和子窗口</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/Windows编程贪吃蛇——控制区代码/" class="archive-article-date">
-  	<time datetime="2019-10-26T17:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">Windows编程贪吃蛇——控制区代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/" class="archive-article-date">
-  	<time datetime="2019-10-26T16:41:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">windows编程贪吃蛇——吃食物身体变长</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/windows编程贪吃蛇移动问题/" class="archive-article-date">
-  	<time datetime="2019-10-26T16:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/windows编程贪吃蛇移动问题/">windows编程贪吃蛇移动问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-windows">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/26/编程贪吃蛇——画蛇身/" class="archive-article-date">
-  	<time datetime="2019-10-26T15:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/26/编程贪吃蛇——画蛇身/">编程贪吃蛇——画蛇身</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/10/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/10/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -469,8 +356,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
