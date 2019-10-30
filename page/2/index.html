@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 14
+    总文章数 15
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,73 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-可靠的TCP和不可靠的IP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/25/可靠的TCP和不可靠的IP/">可靠的TCP和不可靠的IP</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/25/可靠的TCP和不可靠的IP/" class="archive-article-date">
+  	<time datetime="2019-10-25T10:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>对《TCP/IP详解卷一》中“<strong>TCP在不可靠的IP层上提供一个可靠的传输层</strong>”这句话的理解。见下图：</p>
+</blockquote>
+<p><img src="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041" alt></p>
+<p>我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不清楚这个包裹内的东西是什么，他只用负责把这个包裹按照上面写的地址送到买家的手中（IP路由的过程）。由于网络层协议（IP）和快递一样不总是都靠谱，所以丢包是难免的。一旦出现丢包，长期没有收到快递的愤怒的买家就会找到卖家，倒霉的卖家只能把那部手机重新再发一次（一般快递都会推脱责任不予赔偿），这个过程就叫做TCP的超时重传。流着泪的卖家把新的包裹再次交给收件员，对于卖家而言这确实是再次。但是对于收件员而言，这只是一个普通的包裹，绝对不可能知道这是上次丢失包裹的一次重传。（这也是网络分层的目的，向下层隐藏上层的工作细节）。非常幸运的是，这次快递公司“不辱使命”成功完成了任务，把包裹交给了淘宝买家，买家对手机进行检查并且给卖家进行确认（TCP对数据的确认），本次会话结束。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/25/可靠的TCP和不可靠的IP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-TCP-IP的比喻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">

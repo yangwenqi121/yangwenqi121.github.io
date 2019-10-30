@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 14
+    总文章数 15
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,119 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-黄金矿工小游戏（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/28/黄金矿工小游戏（四）/">黄金矿工小游戏（四）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/28/黄金矿工小游戏（四）/" class="archive-article-date">
+  	<time datetime="2019-10-27T16:30:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>今天谈谈如何画出金子石头等东西并实现如何将金子拖回，我们的项目马上就要大功告成啦！ 开心~</p>
+</blockquote>
+<p>接着上篇所讲的我们已经实现了键盘控制钩子停止，可是钩子还有的动态机制是在键盘按下的同时线会拉长，所以要设置两种状态，一种是正常状态，一种是发射状态，要进行两者之间的状态转换。<br>在Avatar.h中定义几个私有变量<br> const float                _MaxExtendLength = 200.0f; //最大伸展多长<br>  float                    _extendLength = 0.0f;   //伸展的长度</p>
+<p>  /* true: down<br>        false: up */<br>        bool                    _bLineOrientation = true;  //伸缩的方向 向下<br>定义两个状态，同样是私有的<br>private:<br>        void normal_state(D2D1_SIZE_F size);<br>        void launched_state(D2D1_SIZE_F size);</p>
+<p>Avatar.cpp</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">void</span> game::Avatar::launched_state(D2D1_SIZE_F size)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/*down */</span></span><br><span class="line">		<span class="keyword">if</span> (_bLineOrientation)</span><br><span class="line">		&#123;</span><br><span class="line">			_extendLength += <span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span> (_extendLength&gt;=_MaxExtendLength)</span><br><span class="line">			&#123;</span><br><span class="line">				_bLineOrientation = !_bLineOrientation;</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/*up*/</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			_extendLength -= <span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span> (_extendLength&lt;=FLT_MIN)</span><br><span class="line">			&#123;</span><br><span class="line">				_bLineOrientation = <span class="literal">true</span>;</span><br><span class="line">				_avatar_state = AvatarState::AS_Normal;<span class="comment">//切换状态</span></span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/* finally, calculate parameters of line. */</span></span><br><span class="line">		_fEndLineX = (_fLineLength+_extendLength) * <span class="built_in">std</span>::<span class="built_in">sin</span>(_fAngle) + _avatar_x + _pBitmap-&gt;GetSize().width / <span class="number">4.0f</span>;</span><br><span class="line">		_fEndLineY = (_fLineLength +_extendLength)* <span class="built_in">std</span>::<span class="built_in">cos</span>(_fAngle) + _pBitmap-&gt;GetSize().height / <span class="number">4.0f</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//在update里调用函数</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// launched state.</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			launched_state(size);</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></code></pre><p>效果图片</p>
+<p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/o8PCc.fLj3s9R.WdFWf*XsdAjrVxGTw99M9TzkwO8FE!/b/dFIBAAAAAAAA&bo=rgY4BAAAAAADB7Y!&rf=viewer_4" alt></p>
+<p>接下来正式进入创造金子和石头的步骤了。。定义ItemManager类</p>
+<p>Q：金子用什么容器装比较好？<br>A：用静态数组 array</p>
+<p>金子位置的分析图片：</p>
+<p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/6uv8twKDTs8yQ8bdmcsy59kNcmgb9mUu0GB.7nLbqQI!/b/dLYAAAAAAAAA&bo=zAJzAQAAAAADB54!&rf=viewer_4" alt></p>
+<p>ItemManager.h</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="comment">//	ItemManager.h.</span></span><br><span class="line"><span class="comment">//	10/26/2019.		created.	</span></span><br><span class="line"><span class="comment">//	10/26/2019.		modified.</span></span><br><span class="line"><span class="comment">//	by yangwenqi.</span></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ITEMMANAGER_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _ITEMMANAGER_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="comment">//	headers...</span></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;d2d1.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;wincodec.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="keyword">namespace</span> game</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//-------------------------------------------------</span></span><br><span class="line">	<span class="comment">//	type of content.</span></span><br><span class="line">	<span class="comment">//-------------------------------------------------</span></span><br><span class="line">	<span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemType</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		IT_NONE = <span class="number">0</span>,<span class="comment">//什么都没有</span></span><br><span class="line">		IT_GOLD, <span class="comment">//金子</span></span><br><span class="line">		IT_STONE,<span class="comment">//石头</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//-------------------------------------------------</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ItemManager</span> </span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		ItemManager();</span><br><span class="line">		~ItemManager();</span><br><span class="line">		<span class="function"><span class="keyword">bool</span> <span class="title">initialize</span><span class="params">(ID2D1HwndRenderTarget* renderTarget)</span></span>;<span class="comment">//初始化</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">render</span><span class="params">(ID2D1HwndRenderTarget* renderTarget)</span></span>;  <span class="comment">//渲染</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ID2D1HwndRenderTarget* renderTarget)</span></span>; <span class="comment">//更新</span></span><br><span class="line">		<span class="function">ID2D1Bitmap* <span class="title">getItemBitmap</span><span class="params">(ItemType type)</span></span>;  <span class="comment">//交互，图片的显示交给Avatar,</span></span><br><span class="line">		<span class="comment">//提供接口给外界，获得哪种类型</span></span><br><span class="line">		<span class="function">ItemType <span class="title">isInsectWith</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;    <span class="comment">//获取当前的点，看是否碰到什么东西</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		IWICImagingFactory * _pWicImgFactory = <span class="literal">nullptr</span>;  </span><br><span class="line">		ID2D1Bitmap*				_gold_bitmap = <span class="literal">nullptr</span>;  <span class="comment">// 获取gold图片</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="built_in">std</span>::<span class="built_in">array</span>&lt;ItemType, 10&gt;, 3&gt; _items;  <span class="comment">// 用数组来装金子，每行10个，有3行</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//-------------------------------------------------</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_ITEMMANAGER_H</span></span></span><br></pre></td></tr></table></figure></code></pre><p>ItemManager.cpp</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ItemManager.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;wincodec.h&gt;</span></span></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="comment">//	ItemManager.cpp.</span></span><br><span class="line"><span class="comment">//	10/26/2019.		created.	</span></span><br><span class="line"><span class="comment">//	10/26/2019.		modified.</span></span><br><span class="line"><span class="comment">//	by yangwenqi.</span></span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">game::ItemManager::ItemManager()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line">game::ItemManager::~ItemManager()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="keyword">bool</span> game::ItemManager::initialize(ID2D1HwndRenderTarget * renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/* creates format convector factory. */</span></span><br><span class="line">	HRESULT hResult = ::CoCreateInstance(</span><br><span class="line">		CLSID_WICImagingFactory,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		CLSCTX_INPROC_SERVER,</span><br><span class="line">		IID_IWICImagingFactory,</span><br><span class="line">		(<span class="keyword">void</span>**)&amp;_pWicImgFactory);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* interfaces for image decoding... */</span></span><br><span class="line">	IWICBitmapDecoder* pDecoder = <span class="literal">nullptr</span>;</span><br><span class="line">	IWICBitmapFrameDecode* pSource = <span class="literal">nullptr</span>;</span><br><span class="line">	IWICFormatConverter* pConverter = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	hResult = _pWicImgFactory-&gt;CreateDecoderFromFilename(</span><br><span class="line">		<span class="string">L"ship.png"</span>,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		GENERIC_READ,</span><br><span class="line">		WICDecodeMetadataCacheOnLoad,</span><br><span class="line">		&amp;pDecoder);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Create the initial frame. */</span></span><br><span class="line">	hResult = pDecoder-&gt;GetFrame(<span class="number">0</span>, &amp;pSource);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	hResult = _pWicImgFactory-&gt;CreateFormatConverter(&amp;pConverter);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	hResult = pConverter-&gt;Initialize(</span><br><span class="line">		pSource,</span><br><span class="line">		GUID_WICPixelFormat32bppPBGRA,</span><br><span class="line">		WICBitmapDitherTypeNone,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		<span class="number">0.0f</span>,</span><br><span class="line">		WICBitmapPaletteTypeMedianCut);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* creates a D2D bitmap from the WIC bitmap. */</span></span><br><span class="line">	hResult = renderTarget-&gt;CreateBitmapFromWicBitmap(</span><br><span class="line">		pConverter,</span><br><span class="line">		<span class="literal">nullptr</span>,</span><br><span class="line">		&amp;_gold_bitmap);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (FAILED(hResult))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	pConverter-&gt;Release();</span><br><span class="line">	pDecoder-&gt;Release();</span><br><span class="line">	_pWicImgFactory-&gt;Release();</span><br><span class="line">	pSource-&gt;Release();</span><br><span class="line">	<span class="comment">/*initialzie items...*/</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;line : _items)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; column : line)</span><br><span class="line">			column = ItemType::IT_NONE; <span class="comment">//将所有东西设置为空</span></span><br><span class="line">	_items[<span class="number">0</span>][<span class="number">3</span>] = ItemType::IT_GOLD;</span><br><span class="line">	_items[<span class="number">1</span>][<span class="number">6</span>] = ItemType::IT_GOLD;</span><br><span class="line">	_items[<span class="number">2</span>][<span class="number">7</span>] = ItemType::IT_STONE;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br><span class="line"><span class="keyword">void</span> game::ItemManager::render(ID2D1HwndRenderTarget * renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (!renderTarget)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">10</span>;++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (_items[i][j]==ItemType::IT_GOLD)</span><br><span class="line">			&#123;</span><br><span class="line">				D2D1_RECT_F rect;</span><br><span class="line">				rect.left = j * <span class="number">128</span>;</span><br><span class="line">				rect.right = rect.left + <span class="number">128</span>;</span><br><span class="line">				rect.top = i * <span class="number">128</span> + <span class="number">250</span>;</span><br><span class="line">				rect.bottom = rect.top + <span class="number">128</span>;</span><br><span class="line">				renderTarget-&gt;DrawBitmap(_gold_bitmap, &amp;rect, <span class="number">1.0f</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> game::ItemManager::update(ID2D1HwndRenderTarget * renderTarget)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line">ID2D1Bitmap * game::ItemManager::getItemBitmap(ItemType type)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> _gold_bitmap;</span><br><span class="line">&#125;</span><br><span class="line">game::ItemType game::ItemManager::isInsectWith(</span><br><span class="line">	<span class="keyword">int</span> x,</span><br><span class="line">	<span class="keyword">int</span> y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> ItemType();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------</span></span><br></pre></td></tr></table></figure></code></pre><p>Game.h</p>
+<p>std::shared_ptr<itemmanager>_item_manager;</itemmanager></p>
+<p>Game.cpp</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//initialize 函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//initialize item manager</span></span><br><span class="line">	<span class="keyword">if</span> (_item_manager)</span><br><span class="line">		<span class="keyword">if</span> (!_item_manager-&gt;initialize(_renderTarget))</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//frame 函数里</span></span><br><span class="line"><span class="comment">// render stuffs here...</span></span><br><span class="line"><span class="comment">//分层画背景</span></span><br><span class="line"><span class="keyword">if</span> (_item_manager)</span><br><span class="line">	_item_manager-&gt;render(_renderTarget);</span><br><span class="line"><span class="keyword">if</span> (_avatar)</span><br><span class="line">	_avatar-&gt;render(_renderTarget);</span><br></pre></td></tr></table></figure></code></pre><p>效果图：</p>
+<p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/Jjd*Lu*Y9ENNfy3*kjxiMnEdshMQn53W7AOdwg.XQCo!/b/dEkBAAAAAAAA&bo=jAXhAgAAAAADB0g!&rf=viewer_4" alt></p>
+<p>下面的实现如何将金子拖回</p>
+<p>分析逻辑，金子取回来的时候是在线方向向下的时候，碰到东西了，返回该类型，要定义一个是否碰到东西的函数<br>ItemType isInsectWith(int x, int y);    //获取当前的点，看是否碰到什么东西</p>
+<p>带着金子回来的状态和正常回来的状态不一样，所以要进行状态转换。定义一个标志位控制，控制各种状态。在Avatar.h 中定义 </p>
+<p>bool             _isComingBack = false;  //是否把东西带回来</p>
+<p>在ItemManager.cpp中实现函数isInsectWith</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">game::ItemType game::ItemManager::isInsectWith(</span><br><span class="line">	<span class="keyword">int</span> x,</span><br><span class="line">	<span class="keyword">int</span> y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (y &lt; <span class="number">250</span>)</span><br><span class="line">		<span class="keyword">return</span> ItemType::IT_NONE;</span><br><span class="line">	<span class="keyword">int</span> index_x = x / <span class="number">128</span>; <span class="comment">//碰到的是第几个的横坐标</span></span><br><span class="line">	<span class="keyword">int</span> index_y = (y - <span class="number">250</span>) / <span class="number">128</span>;<span class="comment">//纵坐标</span></span><br><span class="line">	<span class="keyword">if</span> (index_x &gt; <span class="number">9</span> || index_y &gt;<span class="number">2</span>) <span class="comment">//超过</span></span><br><span class="line">		<span class="keyword">return</span> ItemType::IT_NONE;</span><br><span class="line">		<span class="comment">//碰到了什么东西，y是第几行，x是第几列</span></span><br><span class="line">	<span class="keyword">if</span> (_items[index_y][index_x] != ItemType::IT_NONE)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">auto</span> type= _items[index_y][index_x]; <span class="comment">//记录原来的值</span></span><br><span class="line">		_items[index_y][index_x] = ItemType::IT_NONE;</span><br><span class="line">		<span class="keyword">return</span> type;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ItemType::IT_NONE; 打不到格子就是空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>判断一下是往回来的时候能碰到金子还是伸出去时候能碰到金子，肯定是伸出去的时候能碰到。<br>在Avatar.cpp中的lauched_state中 down实现调用isInsectWith函数</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Game::getSingleton()-&gt;item_mgr()-&gt;isInsectWith(_fEndLineX,_fEndLineY)==</span><br><span class="line">			ItemType::IT_GOLD)<span class="comment">//传的横纵坐标是线的终点坐标，比较重要</span></span><br><span class="line">		&#123;</span><br><span class="line">			_bLineOrientation = !_bLineOrientation;</span><br><span class="line">			_isComingBack = <span class="literal">true</span>; <span class="comment">//后面步骤加入的，之后可以理解</span></span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></code></pre><p>在game.h 的Game 类当中public定义函数<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;ItemManager&gt;item_mgr(<span class="keyword">void</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在 Game.cpp中实现item_mgr这个函数</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;game::ItemManager&gt;</span><br><span class="line">game::Game::item_mgr(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> _item_manager; 这里我犯错误没返回_item_manager,导致bug</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>到这里我们就基本实现了我们的需求，金子是可以带回来的了，但是我们还有一步要考虑，我们这时候的up状态已经改变了，需要在设置一个标志位改变当前的Up状态，</p>
+<p>在Avatar.h中加入状态</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span>                    _isComingBack = <span class="literal">false</span>;  <span class="comment">//是否把东西带回来</span></span><br></pre></td></tr></table></figure></code></pre><p>在Avatar.cpp中。当收线回来的时候，要把 _isComingBack = false重新置位</p>
+<p>接下来就是在render中draw gold 了，更新我们的金子，让中心点刚好接触Avatar的中心</p>
+<pre><code>```c++
+//draw gold
+
+if (_isComingBack)
+
+    if (auto gold = Game::getSingleton()-&gt;item_mgr()-&gt;getItemBitmap(ItemType::IT_GOLD))
+    {
+        D2D1_RECT_F rect;//局部变量
+        rect.left = _fEndLineX-64; //垂直中心
+        rect.top = _fEndLineY - 64;
+        rect.bottom = rect.top + 128;
+        rect.right = rect.left + 128;
+        //画出来
+        renderTarget-&gt;DrawBitmap(
+            gold,
+            &amp;rect,
+            1.0f);
+    }</code></pre><p>现在我们就实现了这个小游戏了，后续会添加一些计分的实现<br>效果图： （已经收回两个金子）</p>
+<p><img src="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/K3u6XnLKj5yzu9iXnas3RIsrEVBg5OIRqQCSx073vi8!/b/dFMBAAAAAAAA&bo=rgY4BAAAAAADB7Y!&rf=viewer_4" alt></p>
+<p><em>未完待续。。。。。。。。。</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/28/黄金矿工小游戏（四）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-黄金矿工小游戏（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -809,73 +922,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/26/创建窗口贪吃蛇/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-可靠的TCP和不可靠的IP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/可靠的TCP和不可靠的IP/">可靠的TCP和不可靠的IP</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/25/可靠的TCP和不可靠的IP/" class="archive-article-date">
-  	<time datetime="2019-10-25T10:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>对《TCP/IP详解卷一》中“<strong>TCP在不可靠的IP层上提供一个可靠的传输层</strong>”这句话的理解。见下图：</p>
-</blockquote>
-<p><img src="http://s2.sinaimg.cn/orignal/52ddfea3t999d6b6f7041" alt></p>
-<p>我们可以把淘宝买卖双方的关系，比作可靠的传输层TCP，因为他们之间的交易是需要确认的是可靠的。如果买家没有收到货物，肯定不能给卖家确认。但是快递公司可比作不可靠的网络层协议（IP）。卖家把一部销售给买家的手机封在一个包裹内（IP封包的过程），并且把这个包裹交给快递。对于快递的收件员，其实他并不清楚这个包裹内的东西是什么，他只用负责把这个包裹按照上面写的地址送到买家的手中（IP路由的过程）。由于网络层协议（IP）和快递一样不总是都靠谱，所以丢包是难免的。一旦出现丢包，长期没有收到快递的愤怒的买家就会找到卖家，倒霉的卖家只能把那部手机重新再发一次（一般快递都会推脱责任不予赔偿），这个过程就叫做TCP的超时重传。流着泪的卖家把新的包裹再次交给收件员，对于卖家而言这确实是再次。但是对于收件员而言，这只是一个普通的包裹，绝对不可能知道这是上次丢失包裹的一次重传。（这也是网络分层的目的，向下层隐藏上层的工作细节）。非常幸运的是，这次快递公司“不辱使命”成功完成了任务，把包裹交给了淘宝买家，买家对手机进行检查并且给卖家进行确认（TCP对数据的确认），本次会话结束。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/可靠的TCP和不可靠的IP/">展开全文 >></a>
         </p>
       
 
