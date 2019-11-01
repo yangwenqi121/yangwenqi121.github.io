@@ -16,7 +16,7 @@
 <meta property="og:description" content="今天实现计分的功能，需要用到观察者（Observer）模式。。。观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)  分析图： IListener.h 123456789101112131415161718192021222324252627282930313233343536//-----------------------------">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://m.qpic.cn/psb?/V13y9b4j30Ka7r/NYqt79N5ZwiaovHZcx9hl9aY6LCZJitVBlHp5Gb39DE!/b/dMMAAAAAAAAA&bo=wQWIAgAAAAADB2w!&rf=viewer_4">
-<meta property="og:updated_time" content="2019-10-30T12:01:32.731Z">
+<meta property="og:updated_time" content="2019-10-30T12:03:26.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黄金矿工小游戏实现计分逻辑部分">
 <meta name="twitter:description" content="今天实现计分的功能，需要用到观察者（Observer）模式。。。观察者需要两个角色完成，subject（消息的发布者），也就是一个接口，还有接收者listener(监听者)  分析图： IListener.h 123456789101112131415161718192021222324252627282930313233343536//-----------------------------">
@@ -68,7 +68,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 16
+    总文章数 17
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -200,6 +200,7 @@
 <p>Game.cpp<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//initialize score manager</span></span><br><span class="line">	_avatar-&gt;add_listener(MessageType::MT_SCORE,</span><br><span class="line">		&amp;*_score_mgr);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
 <p>好了！逻辑部分实现了，至于如何将其展现在屏幕上，就是一些技术部分了，暂且先不说，后续会给加上的！</p>
 <p>未完待续。。。。。。</p>
+<p>全部的代码已经放进我的github里面<br><a href></a></p>
 
       
 
@@ -297,6 +298,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/11/01/如何将项目提交到github/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          如何将项目提交到github
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/28/黄金矿工小游戏（四）/" id="article-nav-older" class="article-nav-link-wrap">

@@ -62,7 +62,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 16
+    总文章数 17
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -158,6 +158,82 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="windows-编程贪吃蛇——画蛇身" class="article article-type-windows  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/26/编程贪吃蛇——画蛇身/">编程贪吃蛇——画蛇身</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/26/编程贪吃蛇——画蛇身/" class="archive-article-date">
+  	<time datetime="2019-10-26T15:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇是如何讲游戏区域画出来，接下来就是如何画出蛇身了<br>画蛇身之前要初始化蛇身<br>初始化要在WM_CREATE消息中初始化<br>画蛇要在WM_PAINT消息中调用<br>蛇的结点用动态数组容器vector来装</p>
+<p>代码片段如下：<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt; //使用vector容器</span></span></span><br></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//蛇的信息</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SNAKESIZE      10     <span class="comment">//蛇的宽高都为10的小方块</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SNAKEMAX       100     <span class="comment">//蛇身长度最大值为100</span></span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;POINT&gt; vSnakePoint;<span class="comment">//声明蛇的坐标</span></span><br><span class="line"></span><br><span class="line">UCHAR ucSnakeHead = <span class="number">4</span>;<span class="comment">//初始化蛇头为4，实际上是vSnakePoint[3];</span></span><br><span class="line">UCHAR ucSnakeTail = <span class="number">0</span>;<span class="comment">//初始化蛇尾为0</span></span><br><span class="line">UCHAR ucSnakekLen = <span class="number">4</span>;<span class="comment">//初始化蛇身长度为4</span></span><br><span class="line"></span><br><span class="line"> 	<span class="comment">//初始化蛇</span></span><br><span class="line"><span class="function">VOID <span class="title">InitSnake</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//先清空坐标</span></span><br><span class="line">    vSnakePoint.clear();</span><br><span class="line">    <span class="comment">//给蛇坐标分配空间</span></span><br><span class="line">    vSnakePoint.resize(SNAKEMAX);</span><br><span class="line">    <span class="comment">//游戏结束后再次初始化</span></span><br><span class="line">    ucSnakeHead = <span class="number">4</span>;<span class="comment">//初始化蛇头为4，实际上是vSnakePoint[3];</span></span><br><span class="line">    ucSnakeTail = <span class="number">0</span>;<span class="comment">//初始化蛇尾为0</span></span><br><span class="line">    ucSnakekLen = <span class="number">4</span>;<span class="comment">//初始化蛇身长度为4</span></span><br><span class="line">    <span class="comment">//初始化每一节的蛇身坐标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vSnakePoint[i].x = i;</span><br><span class="line">        vSnakePoint[i].y = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//画蛇身,hdc是在WM_PAINT消息中传进来的，所以画蛇要在那里调用这个函数</span></span><br><span class="line"><span class="function">VOID <span class="title">DrawSnake</span><span class="params">(HDC hdc)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">//蛇的颜色画刷</span></span><br><span class="line">    <span class="keyword">static</span> HBRUSH hBrush = CreateSolidBrush(RGB(<span class="number">0</span>,<span class="number">243</span>,<span class="number">222</span>));</span><br><span class="line">    SelectObject(hdc, hBrush);</span><br><span class="line">    <span class="comment">//画蛇</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Rectangle(hdc, vSnakePoint[i].x*SNAKESIZE+BOUNDSIZE, vSnakePoint[i].y*SNAKESIZE+BOUNDSIZE,</span><br><span class="line">            (vSnakePoint[i].x+<span class="number">1</span>)*SNAKESIZE + BOUNDSIZE, (vSnakePoint[i].y+<span class="number">1</span>)*SNAKESIZE + BOUNDSIZE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p><font color="red">知识点：SelectObject </font><br>把一个对象(位图、画笔、画刷等)选入指定的设备描述表。新的对象代替同一类型的老对象。</p>
+<blockquote>
+<p>HGDIOBJ SelectObject(<br>  HDC hdc,         // handle to DC<br>  HGDIOBJ hgdiobj  // handle to object<br>);</p>
+</blockquote>
+<p><strong>参数</strong></p>
+<p><strong>hdc</strong> 设备描述表句柄(要载入的设备描述表句柄)<br><strong>hgdiobj</strong> 选择要载入的对象的句柄<br>但该对象的句柄必须使用以下函数创建才有效：</p>
+<p><font color="blue">Bitmap(位图)</font>        CreateBitmap, CreateBitmapIndirect,<br>                                              CreateCompatibleBitmap, CreateDIBitmap,<br>                                              CreateDIBSection </p>
+<p><font color="blue">Brush(画刷)</font>            CreateBrushIndirect, eateDIBPatternBrush,<br>                            CreateDIBPatternBrushPt, CreateHatchBrush,<br>                            CreatePatternBrush, CreateSolidBrush </p>
+<p><font color="blue">Font(字体)</font>              CreateFont, CreateFontIndirect</p>
+<p><font color="blue"> Pen(画笔)</font>                 CreatePen, CreatePenIndirect</p>
+<p><font color="blue"> Region(区域) </font>               CombineRgn, CreateEllipticRgn,<br>                               CreateEllipticRgnIndirect,<br>                               CreatePolygonRgn, CreateRectRgn,<br>                               CreateRectRgnIndirect </p>
+<p>千万不要看到这些长长的宏定义就怕，其实它们就是一个常数而已，你们都可以自己动手算算的，如果封装成类的话就不会有那么多宏定义出现在函数里了。<br>效果如图：<br><img src="https://img-blog.csdn.net/20151227142049743" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/26/编程贪吃蛇——画蛇身/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-创建窗口贪吃蛇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
