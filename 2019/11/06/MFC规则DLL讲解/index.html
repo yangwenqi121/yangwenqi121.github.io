@@ -6,23 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>如何将项目提交到github | 杨雯淇的博客</title>
+  <title>MFC规则DLL讲解 | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近一直搞不清楚如何将项目提交到github，上次一个微信小程序提交历程很是艰辛，经常出现错误，这次终于提交成功了，说下提交过程。  首先创建一个新的项目，填写名称，描述 Repository name: 仓库名称 Description(可选): 仓库描述介绍 Public, Private : 仓库权限（公开共享，私有或指定合作者） Initialize this repository wi">
+  <meta name="description" content="这篇开始讲解MFC规则DLL，前两篇是非MFC的  1.MFC规则DLL特点DLL内部可以使用MFC类库可以被其他所有支持DLL技术的语言所调用 2.MFC规则DLL的入口点函数：默认情况下DLL的入口点函数都是DllMain,MFC规则DLL也不例外，但是因为是支持MFC的，所以在MFC规则DLL中，DllMain函数已经被MFC所封装，所以在你的工程中是看不到DllMain函数的，就好像在M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何将项目提交到github">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/11/01/如何将项目提交到github/index.html">
+<meta property="og:title" content="MFC规则DLL讲解">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/11/06/MFC规则DLL讲解/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
-<meta property="og:description" content="最近一直搞不清楚如何将项目提交到github，上次一个微信小程序提交历程很是艰辛，经常出现错误，这次终于提交成功了，说下提交过程。  首先创建一个新的项目，填写名称，描述 Repository name: 仓库名称 Description(可选): 仓库描述介绍 Public, Private : 仓库权限（公开共享，私有或指定合作者） Initialize this repository wi">
+<meta property="og:description" content="这篇开始讲解MFC规则DLL，前两篇是非MFC的  1.MFC规则DLL特点DLL内部可以使用MFC类库可以被其他所有支持DLL技术的语言所调用 2.MFC规则DLL的入口点函数：默认情况下DLL的入口点函数都是DllMain,MFC规则DLL也不例外，但是因为是支持MFC的，所以在MFC规则DLL中，DllMain函数已经被MFC所封装，所以在你的工程中是看不到DllMain函数的，就好像在M">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://img-blog.csdn.net/20180704092925840?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/2018070321551512?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180704090714111?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2019-11-01T02:24:10.887Z">
+<meta property="og:updated_time" content="2019-11-05T16:09:26.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何将项目提交到github">
-<meta name="twitter:description" content="最近一直搞不清楚如何将项目提交到github，上次一个微信小程序提交历程很是艰辛，经常出现错误，这次终于提交成功了，说下提交过程。  首先创建一个新的项目，填写名称，描述 Repository name: 仓库名称 Description(可选): 仓库描述介绍 Public, Private : 仓库权限（公开共享，私有或指定合作者） Initialize this repository wi">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180704092925840?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:title" content="MFC规则DLL讲解">
+<meta name="twitter:description" content="这篇开始讲解MFC规则DLL，前两篇是非MFC的  1.MFC规则DLL特点DLL内部可以使用MFC类库可以被其他所有支持DLL技术的语言所调用 2.MFC规则DLL的入口点函数：默认情况下DLL的入口点函数都是DllMain,MFC规则DLL也不例外，但是因为是支持MFC的，所以在MFC规则DLL中，DllMain函数已经被MFC所封装，所以在你的工程中是看不到DllMain函数的，就好像在M">
   
   
     <link rel="icon" href="/favicon.png">
@@ -161,20 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-如何将项目提交到github" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MFC规则DLL讲解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何将项目提交到github
+      MFC规则DLL讲解
     </h1>
   
 
         
-        <a href="/2019/11/01/如何将项目提交到github/" class="archive-article-date">
-  	<time datetime="2019-11-01T01:55:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+        <a href="/2019/11/06/MFC规则DLL讲解/" class="archive-article-date">
+  	<time datetime="2019-11-05T16:06:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
 </a>
         
       </header>
@@ -182,23 +178,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>最近一直搞不清楚如何将项目提交到github，上次一个微信小程序提交历程很是艰辛，经常出现错误，这次终于提交成功了，说下提交过程。</p>
+<p>这篇开始讲解MFC规则DLL，前两篇是非MFC的</p>
 </blockquote>
-<p><font color="red">首先创建一个新的项目，填写名称，描述</font></p>
-<p>Repository name: 仓库名称</p>
-<p>Description(可选): 仓库描述介绍</p>
-<p>Public, Private : 仓库权限（公开共享，私有或指定合作者）</p>
-<p>Initialize this repository with a README: 添加一个README.md</p>
-<p>gitignore: 不需要进行版本管理的仓库类型，对应生成文件.gitignore</p>
-<p>license: 证书类型，对应生成文件LICENSE</p>
-<p><img src="https://img-blog.csdn.net/20180704092925840?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p><font color="red">创建完成后，跳转到下面的页面，下面红框中的网址要记住，在后面上传代码的时候需要使用。</font><br><img src="https://img-blog.csdn.net/2018070321551512?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt><br><font color="red">接下来打开你所要上传的文件夹，鼠标右击，打开已经安装好的git bash here</font><br>出现以下界面：<br><img src="https://img-blog.csdn.net/20180704090714111?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NzI1MDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p><font color="red">接下来输入如下代码（关键步骤），把github上面的仓库克隆到本地。</font></p>
-<p>git clone<br><a href="https://github.com/CKTim/BlueTooth.git（https://github.com/CKTim/BlueTooth.git替换成你之前复制的地址）" target="_blank" rel="noopener">https://github.com/CKTim/BlueTooth.git（https://github.com/CKTim/BlueTooth.git替换成你之前复制的地址）</a></p>
-<p><font color="red">这个步骤以后你的本地项目文件夹下面就会多出个文件夹，该文件夹名即为你github上面的项目名，如图我多出了个Test文件夹，我们把本地项目文件夹下的所有文件（除了新多出的那个文件夹不用），其余都复制到那个新多出的文件夹下，</font></p>
-<p><font color="red">接着继续输入命令 cd Test，进入Test文件夹</font></p>
-<p>接下来依次输入以下代码即可完成其他剩余操作：<br>git add .（注：别忘记后面的.，此操作是把Test文件夹下面的文件都添加进来）<br>git commit  -m  “提交信息”  （注：“提交信息”里面换成你需要，如“first commit”）<br>git push -u origin master   （注：此操作目的是把本地仓库push到github上面，此步骤需要你输入帐号和密码）</p>
-<p><em>大功告成！！可以去查看了！</em></p>
+<p><strong>1.MFC规则DLL特点</strong><br>DLL内部可以使用MFC类库<br>可以被其他所有支持DLL技术的语言所调用</p>
+<p><strong>2.MFC规则DLL的入口点函数：</strong><br>默认情况下DLL的入口点函数都是DllMain,MFC规则DLL也不例外，但是因为是支持MFC的，所以在MFC规则DLL中，DllMain函数已经被MFC所封装，所以在你的工程中是看不到DllMain函数的，就好像在MFC对话框工程中你找不到WainMain函数一样，不过也有补救的技巧，就是InitInstance()与ExitInstance()函数，当进程初始化调用DLL时，DLL中会默认调用那个InitInstance()函数，当EXE退出时会调用ExitInstance()函数，但是当有新线程时，处于程序安全性考虑泽没有什么好的办法进行处理</p>
+<p><strong>3.MFC规则DLL分为两类：</strong><br>（1）静态链接到MFC的规则DLL：与MFC库静态链接，会将MFC类库的代码直接编译生成到DLL文件中，在调用这种DLL的接口时，MFC使用DLL的资源，因此，不需要模块状态的切换，但是缺点就是使用这种方式生成的DLL文件大小比较大。<br>（2）动态链接到MFC的规则DLL：可以和调用DLL的EXE同时动态链接到MFC库，在这种情况下，MFC使用主应用程序（即：EXE程序）的资源句柄来加载资源模板，这样，当DLL和应用程序中存在相同ID资源时，就要进行模块的切换，以便MFC能够找到正确的资源魔板。</p>
+<p><strong>4.MFC规则DLL的模块状态切换：</strong><br>三种方法：<br>（1）AFX_MANAGE_STATE(AfxGetStaticModuleState());<br>（2） HINSTANCE hSaveInst=AfxGetResourceHandle();<br>     AfxSetResourceHandle(theApp.m_hInstance);<br>     ……//执行语句；<br>       AfxSetResourceHandle（hSaveInst);<br>（3）HINSTANCE hExeInst=GetModuleHandle(NULL);<br>    HINSTANCE hDLLInst=GetModuleHandle(_T(“MFCDLL.dll”));<br>    ASSERT(hExeInst&amp;&amp;hDLLInst);<br>        AfxSetResourceHandle(hDLLInst);<br>    …….//执行语句；    AfxSetResourceHandle(hExInst);</p>
+<p><font color="red">最方便的还是第一种方法，前两种是在DLL导出函数中进行添加，第三种是在EXE程序中进行添加。</font></p>
 
       
 
@@ -283,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/11/01/如何将项目提交到github/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/11/06/MFC规则DLL讲解/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +283,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/05/windowsAPI动态链接库/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          windowsAPI动态链接库
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">黄金矿工小游戏实现计分逻辑部分</div>
+    <a href="/2019/11/06/DLL导出函数的调用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DLL导出函数的调用</div>
       <i class="icon-circle-right"></i>
     </a>
   
