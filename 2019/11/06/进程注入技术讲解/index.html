@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>Archives: 2019 | 杨雯淇的博客</title>
+  <title>进程注入技术讲解 | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="杨雯淇的博客">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/archives/2019/index.html">
+  <meta name="description" content="本篇的内容是黑客的相关技术，在百度百科没有找到，只能借助相关大佬的博客文章来参考视频讲解博客地址  1.为什么要引入进程注入：到了WinNT以后的系列操作系统中，每个进程都有自己的4GB的私有进程地址空间，彼此互不相关。进程A中的一个地址，比如：0x12345678,到了进程B中的相同地方，存的东西完全不一样，或者说是不可预料。所以说如果进程A想要看看或者修改进程B地址空间中的内容，就必须深入到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程注入技术讲解">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/11/06/进程注入技术讲解/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
+<meta property="og:description" content="本篇的内容是黑客的相关技术，在百度百科没有找到，只能借助相关大佬的博客文章来参考视频讲解博客地址  1.为什么要引入进程注入：到了WinNT以后的系列操作系统中，每个进程都有自己的4GB的私有进程地址空间，彼此互不相关。进程A中的一个地址，比如：0x12345678,到了进程B中的相同地方，存的东西完全不一样，或者说是不可预料。所以说如果进程A想要看看或者修改进程B地址空间中的内容，就必须深入到">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-05T16:17:51.875Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨雯淇的博客">
+<meta name="twitter:title" content="进程注入技术讲解">
+<meta name="twitter:description" content="本篇的内容是黑客的相关技术，在百度百科没有找到，只能借助相关大佬的博客文章来参考视频讲解博客地址  1.为什么要引入进程注入：到了WinNT以后的系列操作系统中，每个进程都有自己的4GB的私有进程地址空间，彼此互不相关。进程A中的一个地址，比如：0x12345678,到了进程B中的相同地方，存的东西完全不一样，或者说是不可预料。所以说如果进程A想要看看或者修改进程B地址空间中的内容，就必须深入到">
   
   
     <link rel="icon" href="/favicon.png">
@@ -153,295 +157,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-进程注入技术讲解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      进程注入技术讲解
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/06/进程注入技术讲解/" class="archive-article-date">
+
+        
+        <a href="/2019/11/06/进程注入技术讲解/" class="archive-article-date">
   	<time datetime="2019-11-05T16:10:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/06/进程注入技术讲解/">进程注入技术讲解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本篇的内容是黑客的相关技术，在百度百科没有找到，只能借助相关大佬的博客文章来参考<br><a href="https://www.bilibili.com/video/av66991103?from=search&seid=3783511796775407133" target="_blank" rel="noopener">视频讲解</a><br><a href="https://blog.csdn.net/Simon798/article/details/100541874" target="_blank" rel="noopener">博客地址</a></p>
+</blockquote>
+<p><strong>1.为什么要引入进程注入</strong>：到了WinNT以后的系列操作系统中，每个进程都有自己的4GB的私有进程地址空间，彼此互不相关。进程A中的一个地址，比如：0x12345678,到了进程B中的相同地方，存的东西完全不一样，或者说是不可预料。所以说如果进程A想要看看或者修改进程B地址空间中的内容，就必须深入到其地址空间中，因为DLL是可以被加载到任何进程中的，所以在进程注入中，DLL应该是主角，也就是说一些核心代码都应该放在DLL中编写。</p>
+<p><strong>优点</strong>：进程隐藏，能穿透防火墙。</p>
+<p><strong>2.注入的缺点</strong>：如果DLL程序的算法不是很好，就是DLL文件有很多的Bug,那么将影响目标进程的执行效率，或者说干脆目标进程崩溃。</p>
+<p><strong>3.注入的具体方法：</strong><br>目前Windows操作系统上面注入的方法很多，《Windows核心编程》上面介绍了不少，大家可以到网上搜索一下，比如钩子，远程线程技术等等。。</p>
+<p><strong>4.具体编程方法：</strong><br>用远程线程技术实现进程的注入。<br>用到API函数<br>OpenProcess(…) //获取已知进程的句柄<br>VirtualAllocEx（…）//在进程中申请空间<br>WriteProcessMemory(…) //向进程写入东西<br>GetProcAddress(…) //取得函数在DLL中的地址<br>CreateRemoteThread(…) //在其他进程中创建新线程<br>CloseHandle(…) //关闭句柄</p>
+<p><strong>补充</strong>：并不是所有的远程注入都能成功，有时候调用OpenProcess(…)或者WriteProcessMemory（…）函数的时候，会调用失败，调用GetLastError()返回错误码是5，拒绝访问。意思是说你的权限不能够，那网上也有线程的提取的函数，这里面也给大家写了一个，但是随着Windows操作系统的升级，Xp-&gt;Vista-&gt;7,其安全性也越来越高，所以以前在XpSp2上编写的程序，到Sp3或者Vista上面权限有不够了，所记忆说提取权代码也不是万能的，技术没有止境。</p>
+<p>代码链接：<br><a href="https://blog.csdn.net/Simon798/article/details/100541874" target="_blank" rel="noopener">https://blog.csdn.net/Simon798/article/details/100541874</a></p>
+<p>视频讲解链接<br><a href="https://www.bilibili.com/video/av66991103/?p=6" target="_blank" rel="noopener">https://www.bilibili.com/video/av66991103/?p=6</a></p>
+<p><em>以上是全部动态链接库暂时需要掌握的知识点。。。</em></p>
+<p>最后附上在博客中看见的相关好的链接<br>关于<br>windows 加载动态链接库extern “C” 、cdecl、stdcall、fastcall、declspec</p>
+<p><a href="https://blog.csdn.net/joker0910/article/details/6249099" target="_blank" rel="noopener">链接</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/11/06/进程注入技术讲解/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/06/MFC规则DLL讲解/" class="archive-article-date">
-  	<time datetime="2019-11-05T16:06:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/06/MFC规则DLL讲解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MFC规则DLL讲解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/06/MFC规则DLL讲解/">MFC规则DLL讲解</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/06/DLL导出函数的调用/" class="archive-article-date">
-  	<time datetime="2019-11-05T16:03:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/06/DLL导出函数的调用/">DLL导出函数的调用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/05/入口点函数及导出函数的讲解/" class="archive-article-date">
-  	<time datetime="2019-11-05T15:54:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/05/入口点函数及导出函数的讲解/">入口点函数及导出函数的讲解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/05/windowsAPI动态链接库/" class="archive-article-date">
-  	<time datetime="2019-11-05T15:40:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/05/windowsAPI动态链接库/">windowsAPI动态链接库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/01/如何将项目提交到github/" class="archive-article-date">
-  	<time datetime="2019-11-01T01:55:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/01/如何将项目提交到github/">如何将项目提交到github</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/" class="archive-article-date">
-  	<time datetime="2019-10-30T11:27:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/30/黄金矿工小游戏实现计分逻辑部分/">黄金矿工小游戏实现计分逻辑部分</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/28/黄金矿工小游戏（四）/" class="archive-article-date">
-  	<time datetime="2019-10-27T16:30:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/28/黄金矿工小游戏（四）/">黄金矿工小游戏（四）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/黄金矿工小游戏（三）/" class="archive-article-date">
-  	<time datetime="2019-10-27T13:18:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/黄金矿工小游戏（三）/">黄金矿工小游戏（三）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/黄金矿工小游戏（二）/" class="archive-article-date">
-  	<time datetime="2019-10-27T12:21:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/黄金矿工小游戏（二）/">黄金矿工小游戏（二）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -465,8 +347,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
