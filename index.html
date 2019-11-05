@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 18
+    总文章数 19
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,83 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-入口点函数及导出函数的讲解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/入口点函数及导出函数的讲解/">入口点函数及导出函数的讲解</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/05/入口点函数及导出函数的讲解/" class="archive-article-date">
+  	<time datetime="2019-11-05T15:54:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇讲解动态链接库的入口函数和导出函数</p>
+</blockquote>
+<p><strong>1.动态库导出函数的查看</strong><br>使用VC++自带的Depends工具进行查看，但是只能看到函数的名字，具体的函数参数及返回值看不到，所以要把动态库导出函数声明的头文件（.h文件）打包给《开发者》<br><strong>2.新建DLL工程：</strong><br>大家在新建工程向导过程中，不要选择“使用MFC”选项，如果选上的话，会把DLL变为MFC规则DLL，就是我们上节课讲的第二种动态链接库。<br><strong>3.DLL程序入口点函数：CUI控制台程序（不是DOS）：main<br>GUI用户界面程序:WinMain<br>DLL程序入口点函数：DllMain,注意：大小写是区别的（仅导出资源的DLL可以没有DLLMain函数）</strong><br>为大家讲解下具体的参数的应用：<br>BOOL APIENTRY DllMain(HMODULE hModule,<br>DWORD ul_reason_for_call,<br>LPVOID lpReserved<br>)<br>{<br>return TRUE;}<br>    (1) hModule参数：指向DLL本身的实例句柄<br>    (2) Ul_reason_for_call 参数：指明了DLL被调用的原因，可以有以下4个取值：</p>
+<p>DLL_PROCESS_ATTACH:<br>当DLL被进程《第一次》调用时，导致DLLMain函数被调用，同时ul_reason_for_call的值为DLL_PROCESS_ATTACH,如果同一个进程后再次调用此DLL时，操作系统只会增加DLL的使用次数，不会再用DLL_PROCESS_ATTACH调用DLL的DllMain函数。</p>
+<p>DLL_PROCESS_DETACH:<br>当DLL被从进程的地址空间解除映射时，系统调用 了他的DllMain，传递的ul_reason_for_call值是DLL_PROCESS_DETACH<br>如果进程的终结是因为调用了TerminateProcess，系统就不会用DLL_PROCESS_DETACH来调用Dll的DllMain函数。这就意味着DLL在进程结束前没有机会执行任何清理工作。 </p>
+<p>DLL_THREAD_ATTACH:<br>当进程创建一线程时，系统查看当前映射到进程进程地址空间的所有DLL文件映像，并用值DLL_THREAD_ATTACH调用DLL的DllMain函数。新创建的线程负责执行这次的DLL的DllMain函数，只有当所有的DLL都处理完这一通知后，系统才允许线程执行他的线程函数。<br>DLL_THREAD_DETACH：如果线程调用了ExitThread来结束线程（线程函数返回时，系统也会自动调用ExitThread),系统查看当前映射到进程空间中的所有DLL文件映像，并用DLL_THREAD_DETACH来调用DllMain函数，通知所有的DLL区执行线程及的清理工作。<br>注意：如果线程的结束时因为系统中的一个线程调用了TerminateThread，系统就不会用值DLL_THREAD_DETACH来调用所有的DLL的DllMain函数。</p>
+<p>ul_reason_for_call多采用 switch_case结构类型</p>
+<p>（3）lpReserved参数：保留，目前没什么意义<br><strong>4.DLL导出函数</strong><br>DLL只有将函数进行导出，这样其他的程序才可以进行调用<br>DLL里面可以有2中函数：一种是导出函数，供被DLL调用的程序使用，比如说是EXE等，另外一种是供DLL内部调用使用，不提供导出</p>
+<p><strong>5.DLL导出函数的方式：*.def文件或__declspec(dllexport)关键字</strong></p>
+<p>（1）*.def文件必须至少包含下列模块定义语句<br>文件中第一个语句必须是LIBRARY语句此语句将.def文件标识为属于DLL<br>LIBRARY语句后面的DLL的名称。连接器将此名称放到DLL的导入库中<br>EXPORTS语句列出名称，可能的话还开会列出DLL带出函数的序号值。通过在函数名的后面加上@符和一个数字，给函数分配序号值。当指定序号值时，序号值的范围必须是从1到N，其中N是DLL导出函数的个数<br>注释语句，在语句前面家分号;<br>例如：<br>;DLLTest.def :Declares the module parameters for the DLL<br>LIBRARY  “DLLTest”<br>EXPORTS<br>add @1<br>fun @2</p>
+<p>(2)__declspec(dllexport)导出方式：</p>
+<p>为了防止名字改编，将extern “C”__declspec(dllexport)语句放在想要导出函数的声明前面；<br>例如：extern “C” __declspec(dllexport) int add (int a,int b);</p>
+<p><strong>注意</strong>：如果要进行函数的导入则把dllexport换成dllimport即可，如：extern “C”__declspec(dllimport)关于函数的导入方面，之后会为大家进行详细的介绍</p>
+<p><strong>备注</strong>：大家在做外函数导出工作之后，可以利用Depends工具查看一下所产生成的DLL，看看导出函数是否成功<br>备注：DLL导出函数是DLL最为常用的一种导出类型，关于DLL进行导出变量或DLL导出<br>类，还有DLL进行导出资源的相关问题，大家可以网上找找相关的资料，这里就不讲解了，总体来说与导出函数的方式都是大同小异的，大家使用灵活</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/05/入口点函数及导出函数的讲解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-windowsAPI动态链接库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -851,79 +928,6 @@ if (_isComingBack)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-windows编程贪吃蛇——吃食物身体变长" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">windows编程贪吃蛇——吃食物身体变长</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/" class="archive-article-date">
-  	<time datetime="2019-10-26T16:41:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上篇实现了蛇身的移动，接下来创建食物并且让蛇能够因为吃食物而身体变长</p>
-<p>4.制作食物<br>分为两个步骤，设定食物坐标，画出食物</p>
-<p>设定食物坐标<br>     <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POINT ptFood = &#123; <span class="number">20</span>,<span class="number">20</span> &#125;;<span class="comment">//初始化食物坐标</span></span><br></pre></td></tr></table></figure></p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//初始化蛇</span></span><br><span class="line"><span class="function">VOID <span class="title">InitSnake</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//先清空坐标</span></span><br><span class="line">    vSnakePoint.clear();</span><br><span class="line">    <span class="comment">//给蛇坐标分配空间</span></span><br><span class="line">    vSnakePoint.resize(SNAKEMAX);</span><br><span class="line">    <span class="comment">//游戏结束后再次初始化</span></span><br><span class="line">    ucSnakeHead = <span class="number">4</span>;<span class="comment">//初始化蛇头为4，实际上是vSnakePoint[3];</span></span><br><span class="line">    ucSnakeTail = <span class="number">0</span>;<span class="comment">//初始化蛇尾为0</span></span><br><span class="line">    ucSnakekLen = <span class="number">4</span>;<span class="comment">//初始化蛇身长度为4</span></span><br><span class="line">    uiSnakeSpeed = SNAKESPEED;<span class="comment">//初始化蛇的速度为200ms</span></span><br><span class="line">    ptDirectHead = &#123; <span class="number">1</span>,<span class="number">0</span> &#125;;<span class="comment">//初始化蛇头方向</span></span><br><span class="line">    ptFood = &#123; <span class="number">20</span>,<span class="number">20</span> &#125;;<span class="comment">//初始化食物坐标</span></span><br><span class="line">    <span class="comment">//初始化每一节的蛇身坐标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vSnakePoint[i].x = i;</span><br><span class="line">        vSnakePoint[i].y = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置食物坐标</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SetFood</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    POINT ptNow = &#123;<span class="number">0</span>&#125;;<span class="comment">//新的食物坐标</span></span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        srand(time(<span class="number">0</span>));<span class="comment">//随机器种子</span></span><br><span class="line">        x = rand() % GAME_WIDE; <span class="comment">//设置食物随机坐标</span></span><br><span class="line">        y = rand() % GAME_HEIGHT;</span><br><span class="line">        <span class="keyword">for</span> ( i = <span class="number">0</span>;i &lt; ucSnakekLen;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ptNow = GetSnakeNode(i);</span><br><span class="line">            <span class="keyword">if</span> (ptNow.x == x &amp;&amp; ptNow.y == y)</span><br><span class="line">                <span class="keyword">break</span>;<span class="comment">//如果食物出现在蛇身，则重新设置食物</span></span><br><span class="line">        &#125;<span class="comment">//如果食物不在蛇身，就退出循环</span></span><br><span class="line">        <span class="keyword">if</span>(ucSnakekLen == i) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ptFood.x = x;</span><br><span class="line">    ptFood.y = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>画食物</p>
-<p>画食物也是在WM_PAINT消息中调用</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//画食物</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawFood</span><span class="params">(HWND hWnd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HDC hdc = GetDC(hWnd);</span><br><span class="line">    HBRUSH hBrush = CreateSolidBrush(RGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">    SelectObject(hdc, hBrush);</span><br><span class="line">     <span class="comment">//椭圆食物</span></span><br><span class="line">      Ellipse(hdc,BOUNDSIZE+ptFood.x*SNAKESIZE, BOUNDSIZE + ptFood.y*SNAKESIZE</span><br><span class="line">          , BOUNDSIZE + (ptFood.x + <span class="number">1</span>)*SNAKESIZE, BOUNDSIZE + (ptFood.y + <span class="number">1</span>)*SNAKESIZE);</span><br><span class="line">      ReleaseDC(hWnd, hdc);</span><br><span class="line">      DeleteObject(hBrush);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>5.让蛇吃食物<br>首先判断蛇是否吃到食物，只要蛇头坐标和食物坐标一样就可以吃到</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//判断是否吃到食物</span></span><br><span class="line"><span class="function">BOOL <span class="title">IsEat</span><span class="params">(POINT ptHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (ptHead.x == ptFood.x &amp;&amp; ptHead.y == ptFood.y)?TRUE:FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>6.吃食物后蛇身就增长<br>只要增长蛇头就可以了</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//增加蛇的长度</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddSnakeLen</span><span class="params">(POINT ptHead)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	    vSnakePoint[ucSnakeHead++] = ptHead;<span class="comment">//蛇头增长</span></span><br><span class="line">	    ucSnakekLen++;<span class="comment">//长度+1</span></span><br><span class="line">	    IsOverTake();<span class="comment">//判断是否超出范围</span></span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//判断是否超出范围</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">IsOverTake</span><span class="params">()</span> <span class="comment">//这个函数写在AddSnakeLen()前面，不然是未声明的标识符</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakeHead) ucSnakeHead = <span class="number">0</span>;   <span class="comment">//超出范围往返循环  </span></span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakeTail)    ucSnakeTail = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (SNAKEMAX == ucSnakekLen)   bIsWin = TRUE;<span class="comment">//赢了</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></code></pre><p>然后将这些小函数加入到SnakeMove()函数里</p>
-<p>效果图：<br><img src="https://img-blog.csdn.net/20151227152040401" alt></p>
-<p>吃到食物后，蛇身增长了，原来是4变成了5</p>
-<p>到这里游戏基本成型了，是不是很简单？难度主要在于蛇是如何移动的，这里需要好好思考，后面的就是设置开始、暂停按钮，是一些修修补补的问题了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">展开全文 >></a>
         </p>
       
 

@@ -6,23 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https:yangwenqi121.github.io.git">
-  <title>TCP/IP的比喻 | 杨雯淇的博客</title>
+  <title>入口点函数及导出函数的讲解 | 杨雯淇的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在学习TCP/IP，看了某博主的文章有了自己的一些见解。以下是TCP/IP分层示意图。博主用实际生活中的事物来比喻TCP/IP不同层的工作原理。    应用层（FTP协议）：首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个">
+  <meta name="description" content="这篇讲解动态链接库的入口函数和导出函数  1.动态库导出函数的查看使用VC++自带的Depends工具进行查看，但是只能看到函数的名字，具体的函数参数及返回值看不到，所以要把动态库导出函数声明的头文件（.h文件）打包给《开发者》2.新建DLL工程：大家在新建工程向导过程中，不要选择“使用MFC”选项，如果选上的话，会把DLL变为MFC规则DLL，就是我们上节课讲的第二种动态链接库。3.DLL程序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP&#x2F;IP的比喻">
-<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/10/25/TCP-IP的比喻/index.html">
+<meta property="og:title" content="入口点函数及导出函数的讲解">
+<meta property="og:url" content="https:yangwenqi121.github.io.git/2019/11/05/入口点函数及导出函数的讲解/index.html">
 <meta property="og:site_name" content="杨雯淇的博客">
-<meta property="og:description" content="最近在学习TCP/IP，看了某博主的文章有了自己的一些见解。以下是TCP/IP分层示意图。博主用实际生活中的事物来比喻TCP/IP不同层的工作原理。    应用层（FTP协议）：首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个">
+<meta property="og:description" content="这篇讲解动态链接库的入口函数和导出函数  1.动态库导出函数的查看使用VC++自带的Depends工具进行查看，但是只能看到函数的名字，具体的函数参数及返回值看不到，所以要把动态库导出函数声明的头文件（.h文件）打包给《开发者》2.新建DLL工程：大家在新建工程向导过程中，不要选择“使用MFC”选项，如果选上的话，会把DLL变为MFC规则DLL，就是我们上节课讲的第二种动态链接库。3.DLL程序">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://s3.sinaimg.cn/orignal/52ddfea3t998861108572">
-<meta property="og:image" content="https://static.runoob.com/images/mix/v2-854e3df8ea850c977c30cb1deb1f64db_r.jpg">
-<meta property="og:image" content="http://a3.qpic.cn/psb?/V13y9b4j2VssR0/YFEuD.Z3Zy4jNcL7RIMFuhAH1d.FZkeIplYK3GFPm3g!/b/dL4AAAAAAAAA&ek=1&kp=1&pt=0&bo=hQRGAgAAAAADJ8c!&tl=1&vuin=1783758872&tm=1572116400&sce=60-1-1&rf=viewer_4">
-<meta property="og:updated_time" content="2019-10-26T19:20:51.625Z">
+<meta property="og:updated_time" content="2019-11-05T16:02:31.349Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP&#x2F;IP的比喻">
-<meta name="twitter:description" content="最近在学习TCP/IP，看了某博主的文章有了自己的一些见解。以下是TCP/IP分层示意图。博主用实际生活中的事物来比喻TCP/IP不同层的工作原理。    应用层（FTP协议）：首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个">
-<meta name="twitter:image" content="http://s3.sinaimg.cn/orignal/52ddfea3t998861108572">
+<meta name="twitter:title" content="入口点函数及导出函数的讲解">
+<meta name="twitter:description" content="这篇讲解动态链接库的入口函数和导出函数  1.动态库导出函数的查看使用VC++自带的Depends工具进行查看，但是只能看到函数的名字，具体的函数参数及返回值看不到，所以要把动态库导出函数声明的头文件（.h文件）打包给《开发者》2.新建DLL工程：大家在新建工程向导过程中，不要选择“使用MFC”选项，如果选上的话，会把DLL变为MFC规则DLL，就是我们上节课讲的第二种动态链接库。3.DLL程序">
   
   
     <link rel="icon" href="/favicon.png">
@@ -161,20 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-TCP-IP的比喻" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-入口点函数及导出函数的讲解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      TCP/IP的比喻
+      入口点函数及导出函数的讲解
     </h1>
   
 
         
-        <a href="/2019/10/25/TCP-IP的比喻/" class="archive-article-date">
-  	<time datetime="2019-10-25T06:15:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+        <a href="/2019/11/05/入口点函数及导出函数的讲解/" class="archive-article-date">
+  	<time datetime="2019-11-05T15:54:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
 </a>
         
       </header>
@@ -182,65 +178,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>最近在学习<strong>TCP/IP</strong>，看了某博主的文章有了自己的一些见解。以下是<strong>TCP/IP</strong>分层示意图。博主用实际生活中的事物来比喻<strong>TCP/IP</strong>不同层的工作原理。  </p>
+<p>这篇讲解动态链接库的入口函数和导出函数</p>
 </blockquote>
-<p><img src="http://s3.sinaimg.cn/orignal/52ddfea3t998861108572" alt><br><font color="red"><strong>应用层（FTP协议）：</strong></font><br><font face="微软雅黑">首先说说应用层，应用层就像在特定的城市特定大厦特定房间内的某一个用户，应用层之间的通讯就像两个不同用户之间发送的信，这个信是点对点的，从一个用户（某一主机内特定应用程序）到另一个特定用户（另一个主机内特定应用程序）。一个主机（大厦）内可能有很多的应用程序（客户），我们如何区分他们呢？实际生活中我们用房间号，在电脑内部区分不同应用程序我们用端口号。<br></font><br><font color="red"><strong>传输层（TCP）：</strong></font><br><font face="微软雅黑">用户写好了信，需要给新套上信封，并且写好发件人所在的大厦，实际上生活中的大厦完全可以类比为我们的计算机和服务器。传输层（TCP）就是在两个不同主机之间传输信息的协议。<br></font><br><font color="red"><strong>网络层（IP）：</strong></font><br><font face="微软雅黑">邮件准备好了，他首先会被送到本城市的快递公司，并且被打包，包裹上会写着源是重庆快递公司，目的是沈阳快递公司，但是重庆快递公司发现它不能直接发送给沈阳快递公司，需要通过北京快递公司进行周转。所以虽然目的是沈阳，但是它首先把这个包裹发给北京。某个城市的快递公司就像IP协议，要抵达目的IP，就要查询路由表，如果发现目的地址不是直连就需要找下一跳。通过了解快递公司的工作，我们了解到IP协议是逐跳工作的。每一跳（路由器）根据目IP地址查询下一跳，并且最终转发到目的地。<br></font><br><font color="red"><strong>链路层（以太网）</strong></font><br><font face="微软雅黑">重庆快递公司已经知道他需要把包裹发给北京快递公司了，现在他就把包裹送到重庆火车站，搭上去往北京的火车，然后在北京火车站卸货。然后送到北京快递公司，北京快递公司再判断下一跳为沈阳快递公司，并且选择适当的传输方式，例如：汽车，最后通过这种传输方式送到目的地沈阳快递公司。链路层协议就像包裹的传输方式，我们可以选择以太网（火车），也可以选择令牌环（汽车）。并且链路层协议是逐介质的，从一个网卡（重庆火车站）到另一个网卡（北京火车站）。所以你会发现一个数据包从源到目的，IP地址总是不变的（源是重庆快递公司，目的是沈阳快递公司），但是链路层协议却在不断的变化，第一跳源是重庆火车站，目的是北京火车站，第二跳源是北京火车站，目的是沈阳汽车站。</font></p>
-<hr>
-<p><font color="purpul"><em>补充</em></font></p>
-<hr>
-<p><font face="微软雅黑">OSI（Open SystemInterconnection）开放式系统互联<br>七层模型：<br><strong>物理层</strong>、<strong>数据链路层</strong>、<strong>网络层</strong>、<strong>传输层</strong>、<strong>会话层</strong>、<strong>表示层</strong>、<strong>应用层</strong>。<br>以下是OSI参考模型：<br></font><br><img src="https://static.runoob.com/images/mix/v2-854e3df8ea850c977c30cb1deb1f64db_r.jpg" alt></p>
-<hr>
-<p><font color="green">物理层（Physical Layer)</font><br><font face="微软雅黑"><br>  作用：定义一些电器，机械，过程和规范，如集线器<br>  PDU（协议数据单元）：bit/比特;<br>  设备：集线器HUB；<br>  注意：没有寻址的概念；</font></p>
-
-
-
-<hr>
-<p><font color="green">数据链路层(Data Link Layer)</font><br><font face="微软雅黑"><br>作用：定义如何格式化数据，支持错误检测；<br>典型协议：以太网，帧中继（古董级VPN）<br>PDU：frame（帧）<br>设备：以太网交换机<br>备注：交换机通过MAC地址转发数据，逻辑链路控制；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">网络层(Network Layer)</font><br><font face="微软雅黑"><br>作用：定义一个逻辑的寻址,选择最佳路径传输,路由数据包；<br>典型协议：IP,IPX,ICMP,ARP(IP-&gt;MAC),IARP）<br>PDU：packet/数据包<br>设备：路由器<br>备注：实现寻址；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">传输层(Transport Layer)</font><br><font face="微软雅黑"><br>作用：提供可靠和尽力而为的传输；<br>典型协议：TCP,UDP,SPX,port(65535个端口)，EIGRP,OSPF<br>PDU：fragment段<br>无典型设备<br>备注：负责网路传输和会话建立；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">会话层( Session Layer)</font><br><font face="微软雅黑"><br>作用：控制会话，建立管理终止应用程序会话；<br>典型协议：<br>PDU：NFS,SQL,ASP,PHP,JSP,RSVP(Resource Reservation Protocol资源预留协议),windows<br>备注：负责会话建立；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">表示层(Presentation Layer)</font><br><font face="微软雅黑"><br>作用：格式化数据；<br>典型协议：ASCII,JPEG,PNG,MP3,WAV,AVI<br>备注：可以提供加密服务；</font></p>
-
-
-
-
-<hr>
-<p><font color="green">应用层(Application Layer)</font><br><font face="微软雅黑"><br>作用：控制应用程序；<br>典型协议：telnet,ssh,http,ftp,smtp,rip,BGP,(未完待续)<br>备注：为应用程序提供网络服务；</font></p>
-
-
-
-
-<hr>
-<p>Q:什么时候有PDU?<br>A：当需要跟别人通信时候才有。</p>
-<hr>
-<p><em>OSI是一种接近完美的理论，注意这种模型只出现在教科书里，这种模型是在TCP/IP协议已经成熟之后提出来的，可以理解为升级版。但是并没有流行起来，主要有以下几个原因！</em></p>
-<p>1.出现时间较晚。<br>2.掺杂了太多政策考量，并没有单独从技术角度出发<br>3.其他一些原因。。。。<br><font color="red"><strong>所以网络数据传输是TCP/IP的天下!</strong></font></p>
-<hr>
-<p>TCP/IP协议是一大堆协议的集合，TCP/IP协议分为四层（也就是数据传输一次主要经历以下4个步骤），分别是从上到下为：应用层，传输层，Internet，物理层。</p>
-<p>假如你给你的基友发一个消息，数据开始传输，这时数据就要遵循TCP/IP协议啦，你的电脑会做出以下动作，这些动作你是看不到的。<br>1、应用层先把你的消息给表示层进行格式转换,你的消息是文字还是图片，还是成人视频并进行加密等操作交给传输层。（这时的数据单元（单位）是信息）<br>2、传输层将数据切割成一段一段的，便与传输并往里加上一些标记，比如当前应用的端口号等，交给Internet。（这时的数据单元（单位）是数据流）<br>3、Internet开始在将数据进行分组，分组头部包含目标地址的IP及一些相关信息交给物理层。（这时的数据单元（单位）是分组）<br>4、物理层将数据转换为比特流开始查找主机真实物理地址进行校验等操作，校验通过，开始嗖<del>嗖</del>嗖~的住目的地跑。（这时的数据单元（单位）是比特）<br>到达目的地后，对方设备会将上面的顺序反向的操作一遍，最后呈现出来。</p>
-<p>个人感觉已经通俗易懂啦！这些东西都都理论知识，属于基础建设，前辈们都已经帮我们铺好路啦。</p>
-<p><font color="red"><em>附上老师制作的一张图片帮助我加深理解</em></font></p>
-<p><img src="http://a3.qpic.cn/psb?/V13y9b4j2VssR0/YFEuD.Z3Zy4jNcL7RIMFuhAH1d.FZkeIplYK3GFPm3g!/b/dL4AAAAAAAAA&ek=1&kp=1&pt=0&bo=hQRGAgAAAAADJ8c!&tl=1&vuin=1783758872&tm=1572116400&sce=60-1-1&rf=viewer_4" alt></p>
+<p><strong>1.动态库导出函数的查看</strong><br>使用VC++自带的Depends工具进行查看，但是只能看到函数的名字，具体的函数参数及返回值看不到，所以要把动态库导出函数声明的头文件（.h文件）打包给《开发者》<br><strong>2.新建DLL工程：</strong><br>大家在新建工程向导过程中，不要选择“使用MFC”选项，如果选上的话，会把DLL变为MFC规则DLL，就是我们上节课讲的第二种动态链接库。<br><strong>3.DLL程序入口点函数：CUI控制台程序（不是DOS）：main<br>GUI用户界面程序:WinMain<br>DLL程序入口点函数：DllMain,注意：大小写是区别的（仅导出资源的DLL可以没有DLLMain函数）</strong><br>为大家讲解下具体的参数的应用：<br>BOOL APIENTRY DllMain(HMODULE hModule,<br>DWORD ul_reason_for_call,<br>LPVOID lpReserved<br>)<br>{<br>return TRUE;}<br>    (1) hModule参数：指向DLL本身的实例句柄<br>    (2) Ul_reason_for_call 参数：指明了DLL被调用的原因，可以有以下4个取值：</p>
+<p>DLL_PROCESS_ATTACH:<br>当DLL被进程《第一次》调用时，导致DLLMain函数被调用，同时ul_reason_for_call的值为DLL_PROCESS_ATTACH,如果同一个进程后再次调用此DLL时，操作系统只会增加DLL的使用次数，不会再用DLL_PROCESS_ATTACH调用DLL的DllMain函数。</p>
+<p>DLL_PROCESS_DETACH:<br>当DLL被从进程的地址空间解除映射时，系统调用 了他的DllMain，传递的ul_reason_for_call值是DLL_PROCESS_DETACH<br>如果进程的终结是因为调用了TerminateProcess，系统就不会用DLL_PROCESS_DETACH来调用Dll的DllMain函数。这就意味着DLL在进程结束前没有机会执行任何清理工作。 </p>
+<p>DLL_THREAD_ATTACH:<br>当进程创建一线程时，系统查看当前映射到进程进程地址空间的所有DLL文件映像，并用值DLL_THREAD_ATTACH调用DLL的DllMain函数。新创建的线程负责执行这次的DLL的DllMain函数，只有当所有的DLL都处理完这一通知后，系统才允许线程执行他的线程函数。<br>DLL_THREAD_DETACH：如果线程调用了ExitThread来结束线程（线程函数返回时，系统也会自动调用ExitThread),系统查看当前映射到进程空间中的所有DLL文件映像，并用DLL_THREAD_DETACH来调用DllMain函数，通知所有的DLL区执行线程及的清理工作。<br>注意：如果线程的结束时因为系统中的一个线程调用了TerminateThread，系统就不会用值DLL_THREAD_DETACH来调用所有的DLL的DllMain函数。</p>
+<p>ul_reason_for_call多采用 switch_case结构类型</p>
+<p>（3）lpReserved参数：保留，目前没什么意义<br><strong>4.DLL导出函数</strong><br>DLL只有将函数进行导出，这样其他的程序才可以进行调用<br>DLL里面可以有2中函数：一种是导出函数，供被DLL调用的程序使用，比如说是EXE等，另外一种是供DLL内部调用使用，不提供导出</p>
+<p><strong>5.DLL导出函数的方式：*.def文件或__declspec(dllexport)关键字</strong></p>
+<p>（1）*.def文件必须至少包含下列模块定义语句<br>文件中第一个语句必须是LIBRARY语句此语句将.def文件标识为属于DLL<br>LIBRARY语句后面的DLL的名称。连接器将此名称放到DLL的导入库中<br>EXPORTS语句列出名称，可能的话还开会列出DLL带出函数的序号值。通过在函数名的后面加上@符和一个数字，给函数分配序号值。当指定序号值时，序号值的范围必须是从1到N，其中N是DLL导出函数的个数<br>注释语句，在语句前面家分号;<br>例如：<br>;DLLTest.def :Declares the module parameters for the DLL<br>LIBRARY  “DLLTest”<br>EXPORTS<br>add @1<br>fun @2</p>
+<p>(2)__declspec(dllexport)导出方式：</p>
+<p>为了防止名字改编，将extern “C”__declspec(dllexport)语句放在想要导出函数的声明前面；<br>例如：extern “C” __declspec(dllexport) int add (int a,int b);</p>
+<p><strong>注意</strong>：如果要进行函数的导入则把dllexport换成dllimport即可，如：extern “C”__declspec(dllimport)关于函数的导入方面，之后会为大家进行详细的介绍</p>
+<p><strong>备注</strong>：大家在做外函数导出工作之后，可以利用Depends工具查看一下所产生成的DLL，看看导出函数是否成功<br>备注：DLL导出函数是DLL最为常用的一种导出类型，关于DLL进行导出变量或DLL导出<br>类，还有DLL进行导出资源的相关问题，大家可以网上找找相关的资料，这里就不讲解了，总体来说与导出函数的方式都是大同小异的，大家使用灵活</p>
 
       
 
@@ -325,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/10/25/TCP-IP的比喻/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data= http:https:yangwenqi121.github.io.git/2019/11/05/入口点函数及导出函数的讲解/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -339,18 +290,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/25/可靠的TCP和不可靠的IP/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          可靠的TCP和不可靠的IP
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/19/我第一次学习使用MarkDown语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我第一次学习使用MarkDown语法</div>
+    <a href="/2019/11/05/windowsAPI动态链接库/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">windowsAPI动态链接库</div>
       <i class="icon-circle-right"></i>
     </a>
   
