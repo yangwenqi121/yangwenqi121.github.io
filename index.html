@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 17
+    总文章数 18
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,75 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-windowsAPI动态链接库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/05/windowsAPI动态链接库/">windowsAPI动态链接库</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/05/windowsAPI动态链接库/" class="archive-article-date">
+  	<time datetime="2019-11-05T15:40:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Vc++——动态链接库编程（一）</strong></p>
+<blockquote>
+<p>最近自学动态链接库，在网上和看了一些书籍，想记录些笔记<br><a href="https://www.bilibili.com/video/av66991103?from=search&seid=3783511796775407133" target="_blank" rel="noopener">视频链接</a></p>
+</blockquote>
+<p><strong>1.Windows 操作系统平台</strong><br>动态链接库：dll类型<br>静态链接库：lib类型<br><strong>2.动态库简介</strong><br>动态链接库可以看成是一种仓库，一种资源的集合，函数、变量、类、资源。。。。。都可以由动态链接库来导出。<br><strong>3.动态库与静态库的区别：</strong><br>a.静态库中的代码会直接塞到EXE中，而动态库泽可以被EXE动态的加载或卸载。<br>b。静态库中不能再包含其他的动态或静态库，而动态库泽可以。<br>** 4.实现方式**<br>动态库可以被多种语言实现，只要遵循动态库的接口规范和调用方式即可，用各种语言编写的动态库也可以相互调用。比如Windows系统提供的动态库，在任何开发语言的编译器上都可以调用，VB,VC,Delphi,C#等。<br><strong>5.VC++编译器中动态库的分类</strong><br>1.非MFC的DLL ——即使用SDK API进行编程，能被其他所有语言调用。<br>2.MFC规则DLL——可以使用MFC进行编程，能被其他所有语言调用<br>3MFC扩展DLL——可以使用MFC进行编程，但只能被用MFC编写的程序调用</p>
+<p><em>为什么加入extern “C”??</em><br>　实现C++与C及其它语言的混合编程。<br><a href="https://www.cnblogs.com/yaozhongxiao/archive/2010/09/15/1826770.html" target="_blank" rel="noopener">解释链接</a><br><em>调用静态库有哪些方面要注意？？</em><br>1.把静态库中的导出的一些函数，声明，头文件包含进exe工程中。<br>2.把lib静态库链接到我们的exe工程中。</p>
+<p><strong>6.静态库操作</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/05/windowsAPI动态链接库/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-如何将项目提交到github" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -855,77 +924,6 @@ if (_isComingBack)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/27/windows编程贪吃蛇——吃食物身体变长/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-windows编程贪吃蛇移动问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/windows编程贪吃蛇移动问题/">windows编程贪吃蛇移动问题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/windows编程贪吃蛇移动问题/" class="archive-article-date">
-  	<time datetime="2019-10-26T16:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上篇讲到如何讲蛇身画出来，接下来讲解如何让蛇身移动，这是一个难点，也是我之前做矩形块移动的小项目的一个启发</p>
-<p>首先创建一个定时器，然后默认只向一个方向移动，先不要着急想着如何用键盘控制，只要先向一个方向移动就好，先假设向右移动。</p>
-<p>代码片段如下：</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">#<span class="meta-keyword">define</span>   SNAKESPEED       500    <span class="comment">//初始化蛇的速度为500ms</span></span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span>   TIMERID_1        1        <span class="comment">//定时器ID</span></span></span><br><span class="line">	UINT uiSnakeSpeed = SNAKESPEED;<span class="comment">//初始化蛇的速度为500ms</span></span><br><span class="line">	POINT ptDirectHead = &#123;<span class="number">1</span>,<span class="number">0</span>&#125;;<span class="comment">//蛇头的方向,初始化为向右</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取蛇结点位置</span></span><br><span class="line"><span class="comment">//index是一个偏移蛇尾的偏移量</span></span><br><span class="line"><span class="comment">//很多人不懂&amp;是什么意思，在C语言中是取地址的意思，在C++中还有一个用法就是引用传递，意思是，比如有个函数是int f(int &amp;a);</span></span><br><span class="line"><span class="comment">//那么你就只需要传递一个普通变量进去就相当于C语言中传递的指针一样了，都可以改变实参。f(a);</span></span><br><span class="line">	<span class="function">POINT &amp;<span class="title">GetSnakeNode</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	    <span class="comment">//因为蛇的位置时刻改变，所以我们要用相对坐标来计算</span></span><br><span class="line">	    <span class="comment">//自己画个图算算就理解了。</span></span><br><span class="line">	    <span class="keyword">int</span> i = ucSnakeTail + index;<span class="comment">//蛇身的长度</span></span><br><span class="line">	    <span class="comment">//如果超过了蛇的最大长度则往返循环</span></span><br><span class="line">	    <span class="keyword">if</span> (i&gt;=SNAKEMAX)</span><br><span class="line">	    &#123;</span><br><span class="line">	        i -= SNAKEMAX;</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="comment">//返回某个坐标</span></span><br><span class="line">	    <span class="keyword">return</span> vSnakePoint[i];</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//让蛇动起来</span></span><br><span class="line"><span class="comment">//里面有很多自己写的小函数，现在就先知道它们有什么用处，先不用管它如何实现，后面会贴出来的</span></span><br><span class="line">	<span class="function">BOOL  <span class="title">SnakeMove</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	    BOOL bRet = FALSE;</span><br><span class="line">	    <span class="keyword">do</span> </span><br><span class="line">	    &#123;</span><br><span class="line">	        POINT ptNewNode = &#123; <span class="number">0</span> &#125;;<span class="comment">//新的蛇头</span></span><br><span class="line">	        <span class="comment">//前面是当前蛇头的x坐标，如果当前蛇头的方向是向右，那么x==1，所以蛇头向前移动一步，同理其它方向也是如此</span></span><br><span class="line">	        <span class="comment">//然后两个相加就是移动后的蛇头新坐标</span></span><br><span class="line">	        ptNewNode.x = GetSnakeNode(ucSnakekLen<span class="number">-1</span>).x + ptDirectHead.x;</span><br><span class="line">	        ptNewNode.y = GetSnakeNode(ucSnakekLen - <span class="number">1</span>).y + ptDirectHead.y;</span><br><span class="line">	        <span class="keyword">if</span> (!IsStrikeWall(ptNewNode))<span class="comment">//判断新的蛇头是否撞墙</span></span><br><span class="line">	             <span class="keyword">break</span>;     </span><br><span class="line">	        <span class="keyword">if</span> (!IsStrikeSelf(ptNewNode))<span class="comment">//判断蛇是否撞到自己</span></span><br><span class="line">	              <span class="keyword">break</span>;    </span><br><span class="line">	        <span class="keyword">if</span> (IsEat(ptNewNode))<span class="comment">//判断是否吃到食物</span></span><br><span class="line">	        &#123;</span><br><span class="line">	            SetFood();<span class="comment">//重新设置食物坐标</span></span><br><span class="line">	            uiScore += <span class="number">10</span>;<span class="comment">//吃到一个食物加10分</span></span><br><span class="line">	            AddSnakeLen(ptNewNode);<span class="comment">//增加蛇的长度</span></span><br><span class="line">	            <span class="keyword">break</span>;</span><br><span class="line">	        &#125;</span><br><span class="line">	        vSnakePoint[ucSnakeHead].x = ptNewNode.x;<span class="comment">//蛇头移动</span></span><br><span class="line">	        vSnakePoint[ucSnakeHead++].y = ptNewNode.y;</span><br><span class="line">	        ucSnakeTail++;<span class="comment">//整个蛇都移动了蛇尾肯定要移动是吧</span></span><br><span class="line">	        IsOverTake();<span class="comment">//判断是否超出范围</span></span><br><span class="line">	        bRet = TRUE;</span><br><span class="line">	    &#125; <span class="keyword">while</span> (FALSE);</span><br><span class="line">	    <span class="keyword">return</span> bRet;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//在WM_CREATE消息中设置定时器</span></span><br><span class="line">	SetTimer(hWnd, TIMERID_1, uiSnakeSpeed, <span class="literal">nullptr</span>);<span class="comment">//设置定时器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定时器消息,处理蛇的移动和其它事件</span></span><br><span class="line">	<span class="keyword">case</span> WM_TIMER:</span><br><span class="line">	     &#123;  </span><br><span class="line">	            <span class="comment">//移动蛇</span></span><br><span class="line">	            SnakeMove();</span><br><span class="line">	            <span class="comment">//重新画蛇</span></span><br><span class="line">	            RECT rect = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	            SetRect(&amp;rect, <span class="number">0</span>, <span class="number">0</span>, BOUNDSIZE + GAME_WIDE*SNAKESIZE,</span><br><span class="line">	                BOUNDSIZE + GAME_HEIGHT*SNAKESIZE);</span><br><span class="line">	            <span class="comment">//这一步是必须的，必须让游戏区无效才能重画</span></span><br><span class="line">	            InvalidateRect(hWnd, &amp;rect, TRUE);</span><br><span class="line">	        &#125;</span><br><span class="line"></span><br><span class="line">	        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在WM_DESTROY消息中关掉计时器</span></span><br><span class="line">	<span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">	    KillTimer(hWnd, TIMERID_1);</span><br></pre></td></tr></table></figure></code></pre><p>接下来是效果图：</p>
-<p><img src="https://img-blog.csdn.net/20151227145015559" alt></p>
-<p>下面就可以考虑键盘消息控制蛇的方向了</p>
-<p>代码片段如下：</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> WM_KEYDOWN:<span class="comment">//控制方向</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (wParam)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> VK_UP:<span class="comment">//x=0，y=1就是向下，所以当蛇头向上的时候不能向下走</span></span><br><span class="line">        <span class="keyword">if</span> (ptDirectHead.x != <span class="number">0</span> &amp;&amp; ptDirectHead.y != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ptDirectHead.x = <span class="number">0</span>;</span><br><span class="line">            ptDirectHead.y = <span class="number">-1</span>;<span class="comment">//向上y减小</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> VK_DOWN:</span><br><span class="line">        <span class="keyword">if</span> (ptDirectHead.x != <span class="number">0</span> &amp;&amp; ptDirectHead.y != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ptDirectHead.x = <span class="number">0</span>;</span><br><span class="line">            ptDirectHead.y = <span class="number">1</span>;<span class="comment">//向下y增大</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> VK_LEFT:</span><br><span class="line">        <span class="keyword">if</span> (ptDirectHead.y != <span class="number">0</span> &amp;&amp; ptDirectHead.x != <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ptDirectHead.x = <span class="number">-1</span>;<span class="comment">//向左x减小</span></span><br><span class="line">            ptDirectHead.y = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> VK_RIGHT:</span><br><span class="line">        <span class="keyword">if</span> (ptDirectHead.y != <span class="number">0</span> &amp;&amp; ptDirectHead.x != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ptDirectHead.x = <span class="number">1</span>;<span class="comment">//向右x增大</span></span><br><span class="line">            ptDirectHead.y = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></code></pre><p>效果图如下：</p>
-<p><img src="https://img-blog.csdn.net/20151227150541074" alt></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/windows编程贪吃蛇移动问题/">展开全文 >></a>
         </p>
       
 
