@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 19
+    总文章数 20
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,75 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-DLL导出函数的调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/DLL导出函数的调用/">DLL导出函数的调用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/06/DLL导出函数的调用/" class="archive-article-date">
+  	<time datetime="2019-11-05T16:03:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>上节课给大家讲解了DLL如何导出函数，那么这节课给大家讲解在EXE中如何调用DLL的导出函数，进行使用<br>上节已经给大家说过了，DLL进行导出函数有两种，那么与之对应的调用DLL的导出函数的方法也有2种。</p>
+</blockquote>
+<p><strong>1。隐式链接</strong>：<br>隐式链接的特点是由编译器完成对DLL的加载和程序结束时对DLL的卸载工作，如果程序结束时如果还有其他的应用程序使用该DLL，那么系统就会使DLL的使用计数－1，当DLL的使用计数降为0时，会将DLL从内存中删除。<br>优缺点：隐式链接DLL的方法简单使用，但缺少灵活性<br>使用方法：使用隐式链接DLL开发时，首先，需要将DLL的引入库文件（*.lib——编译生成 DLL时，会一起生成的）与应用程序进行静态链接，因为引入库文件包含DLL的各种输出资源，如导出函数，导出类等信息，这些信息指向DLL的函数指针等等，EXE执行时，DLL被“自动”加载，EXE退出时DLL被自动卸载。</p>
+<p><strong>2,。显示链接</strong>：<br>显示链接方式是完全由编程者用API加载和卸载DLL，编程者可以决定何时加载DLL，加载哪个DLL，何时卸载DLL，卸载哪个DLL等。<br>优缺点：显示链接方式充分体现了DLL的灵活性，是比较常用的调用DLL方式。但是与静态链接相比稍微复杂了些。</p>
+<p>使用方法：<br>LoadLibrary(…):该API用于加载指定的DLL<br>GetProcAddress(…):该API用于获取DLL中导出函数的指针，即导出函数的入口点。<br>FreeLibrary(…):进行卸载<br>注：如果程序中多次调用LoadLibrary(…)加载同一DLL时，在卸载的时候也要调用相应次数 的FreeLibrary()进行卸载<br><strong>3.举例说明。。</strong></p>
+<p>使用LoadLibrary显示链接，在这个函数的 参数中可以指定DLL文件的完整路径，如果不指定路径，windows将遵循如下的搜索顺序来定位DLL：<br>    (1) EXE文件所在的目录；<br>    (2) 进程的当前工作目录<br>    (3) Windows系统目录：例如：c:\WINDOWS\system32<br>    (4) Windows目录：例如：C:\WINDOWS<br>    (5) 环境变量的目录<br><strong>说明</strong>：进程的当前工作目录：使用函数SetCurrentDirectory(…)设置的路径，或者从父进程继承而来的路径，使用GetCurrentDirectory()得到<br>EXE文件所在的目录：本EXE文件所在的绝对路径，使用GetModuleFileName得到<br>两者可能不同<br>GetProcAddress函数可以有两种方式取得DLL导出函数的入口点<br>例如：GetProAdress(hMod,”add”):// 按照函数名称方式<br>GetProAdress(hMod,MAKEINTRESOURCEA(1)); //按照导出函数序号方式</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/06/DLL导出函数的调用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-入口点函数及导出函数的讲解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -855,79 +924,6 @@ if (_isComingBack)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/27/windows编程贪吃蛇——按钮的触发机制和子窗口/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Windows编程贪吃蛇——控制区代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">Windows编程贪吃蛇——控制区代码</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/27/Windows编程贪吃蛇——控制区代码/" class="archive-article-date">
-  	<time datetime="2019-10-26T17:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>游戏区已经结束了，接下来设置一下控制区的按钮，包括暂停、开始、加速、减速按钮，游戏结束后可以重置开始按钮等等。<br>先是不考虑按钮的动态机制，只管把他创建出来</p>
-<p>代码如下：<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   PAUSEID               1     <span class="comment">//暂停按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   STARTID               2     <span class="comment">//开始按钮ID </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDUPID             3     <span class="comment">//加速按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDDOWNID           4     <span class="comment">//减速按钮ID</span></span></span><br><span class="line">   </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>  ixWind = <span class="number">0</span>, iyWind = <span class="number">0</span>;<span class="comment">//窗口大小参数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> ixClient = <span class="number">0</span>, iyClient = <span class="number">0</span>;<span class="comment">//客户区大小参数</span></span><br><span class="line"><span class="keyword">static</span> HWND  hPause = <span class="literal">nullptr</span>;<span class="comment">//暂停按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hStart = <span class="literal">nullptr</span>;<span class="comment">//开始按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hSpeedUp = <span class="literal">nullptr</span>;<span class="comment">//加速按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hSpeedDown = <span class="literal">nullptr</span>;<span class="comment">//减速按钮句柄</span></span><br></pre></td></tr></table></figure></p>
-<p>创建按钮放在WM_CREATE里面写</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个暂停按钮,宽100高50</span></span><br><span class="line">	hPause = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"Pause"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">30</span>, BOUNDSIZE + <span class="number">20</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)PAUSEID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个开始按钮,宽100高50</span></span><br><span class="line">	hStart = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"Start"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">170</span>, BOUNDSIZE + <span class="number">20</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)STARTID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个加速按钮,宽100高50</span></span><br><span class="line">	hSpeedUp = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"SpeedUp"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">30</span>, BOUNDSIZE + <span class="number">90</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)SPEEDUPID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个减速按钮,宽100高50</span></span><br><span class="line">	hSpeedDown = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"SpeedDown"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">170</span>, BOUNDSIZE + <span class="number">90</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)SPEEDDOWNID, hInst, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></code></pre><p>说下CreateWindowW（）这个函数的意思，</p>
-<blockquote>
-<p>void CreateWindowA(<br>   <strong>lpClassName</strong>,              //窗口类的名字<br>   <strong>lpWindowName</strong>,            //窗标题<br>   <strong>dwStyle</strong>,                    //窗口样式，参照下表<br>  <strong>x</strong>,                        //位置，默认的X,Y指定为：Integer(CW_USEDEFAULT)<br>   <strong>y</strong>,                        //位置<br>   <strong>nWidth</strong>,                    //大小，默认的宽度高度指定为Integer(CW_USEDEFAULT)<br>   <strong>nHeight</strong>,                  //大小<br>   <strong>hWndParent</strong>,                //父窗口句柄<br>   <strong>hMenu</strong>,                    //主菜单句柄<br>   <strong>hInstance</strong>,                //模块实例句柄，就是当前exe的句柄<br>   <strong>lpParam</strong>                    //附加参数，一般创建多文档界面时才会用到，一般设为nil<br>);</p>
-</blockquote>
-<p>此处中文解释这个函数很详细，附上链接<br><a href="https://www.cnblogs.com/yangyuqing/p/10236113.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangyuqing/p/10236113.html</a></p>
-<p>显示分数</p>
-<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示分数</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowScore</span><span class="params">(HWND hwnd)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		HDC hdc = GetDC(hwnd);</span><br><span class="line">		HPEN hPen = CreatePen(PS_SOLID, <span class="number">4</span>, RGB(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>));</span><br><span class="line">		SelectObject(hdc, hPen);</span><br><span class="line">		<span class="keyword">int</span> iLength = <span class="number">0</span>;</span><br><span class="line">		TCHAR szBuffer[<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		iLength = wsprintf(szBuffer, <span class="string">L"Score: %u"</span>, uiScore);</span><br><span class="line">		TextOut(hdc, BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">100</span>,</span><br><span class="line">			BOUNDSIZE + <span class="number">200</span>, szBuffer, iLength);</span><br><span class="line">		ReleaseDC(hwnd, hdc);</span><br><span class="line">		DeleteObject(hPen);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></code></pre><p>在WM_PAINT里面调用函数<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示分数</span></span><br><span class="line">		ShowScore(hwnd);</span><br></pre></td></tr></table></figure></p>
-<p>效果图如下：<br><img src="http://a1.qpic.cn/psb?/V13y9b4j30Ka7r/3VVJpwTmsucjHceFz.ROh4HMPMVfBq28JazRhZ8Vtu4!/m/dFQBAAAAAAAAnull&bo=CgUvAwAAAAADBwE!&rf=photolist&t=5" alt></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">展开全文 >></a>
         </p>
       
 

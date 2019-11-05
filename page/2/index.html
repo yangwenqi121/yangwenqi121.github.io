@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-    总文章数 19
+    总文章数 20
 </nav>
 		<nav class="header-smart-menu">
     		
@@ -154,6 +154,79 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Windows编程贪吃蛇——控制区代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">Windows编程贪吃蛇——控制区代码</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/27/Windows编程贪吃蛇——控制区代码/" class="archive-article-date">
+  	<time datetime="2019-10-26T17:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>游戏区已经结束了，接下来设置一下控制区的按钮，包括暂停、开始、加速、减速按钮，游戏结束后可以重置开始按钮等等。<br>先是不考虑按钮的动态机制，只管把他创建出来</p>
+<p>代码如下：<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   PAUSEID               1     <span class="comment">//暂停按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   STARTID               2     <span class="comment">//开始按钮ID </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDUPID             3     <span class="comment">//加速按钮ID</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   SPEEDDOWNID           4     <span class="comment">//减速按钮ID</span></span></span><br><span class="line">   </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>  ixWind = <span class="number">0</span>, iyWind = <span class="number">0</span>;<span class="comment">//窗口大小参数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> ixClient = <span class="number">0</span>, iyClient = <span class="number">0</span>;<span class="comment">//客户区大小参数</span></span><br><span class="line"><span class="keyword">static</span> HWND  hPause = <span class="literal">nullptr</span>;<span class="comment">//暂停按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hStart = <span class="literal">nullptr</span>;<span class="comment">//开始按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hSpeedUp = <span class="literal">nullptr</span>;<span class="comment">//加速按钮句柄</span></span><br><span class="line"><span class="keyword">static</span> HWND  hSpeedDown = <span class="literal">nullptr</span>;<span class="comment">//减速按钮句柄</span></span><br></pre></td></tr></table></figure></p>
+<p>创建按钮放在WM_CREATE里面写</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个暂停按钮,宽100高50</span></span><br><span class="line">	hPause = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"Pause"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">30</span>, BOUNDSIZE + <span class="number">20</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)PAUSEID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个开始按钮,宽100高50</span></span><br><span class="line">	hStart = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"Start"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">170</span>, BOUNDSIZE + <span class="number">20</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)STARTID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个加速按钮,宽100高50</span></span><br><span class="line">	hSpeedUp = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"SpeedUp"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">30</span>, BOUNDSIZE + <span class="number">90</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)SPEEDUPID, hInst, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//创建一个减速按钮,宽100高50</span></span><br><span class="line">	hSpeedDown = CreateWindowW(<span class="string">L"button"</span>, <span class="string">L"SpeedDown"</span>, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,</span><br><span class="line">	BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">170</span>, BOUNDSIZE + <span class="number">90</span>,</span><br><span class="line">	<span class="number">100</span>, <span class="number">50</span>, hwnd, (HMENU)SPEEDDOWNID, hInst, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></code></pre><p>说下CreateWindowW（）这个函数的意思，</p>
+<blockquote>
+<p>void CreateWindowA(<br>   <strong>lpClassName</strong>,              //窗口类的名字<br>   <strong>lpWindowName</strong>,            //窗标题<br>   <strong>dwStyle</strong>,                    //窗口样式，参照下表<br>  <strong>x</strong>,                        //位置，默认的X,Y指定为：Integer(CW_USEDEFAULT)<br>   <strong>y</strong>,                        //位置<br>   <strong>nWidth</strong>,                    //大小，默认的宽度高度指定为Integer(CW_USEDEFAULT)<br>   <strong>nHeight</strong>,                  //大小<br>   <strong>hWndParent</strong>,                //父窗口句柄<br>   <strong>hMenu</strong>,                    //主菜单句柄<br>   <strong>hInstance</strong>,                //模块实例句柄，就是当前exe的句柄<br>   <strong>lpParam</strong>                    //附加参数，一般创建多文档界面时才会用到，一般设为nil<br>);</p>
+</blockquote>
+<p>此处中文解释这个函数很详细，附上链接<br><a href="https://www.cnblogs.com/yangyuqing/p/10236113.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangyuqing/p/10236113.html</a></p>
+<p>显示分数</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示分数</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowScore</span><span class="params">(HWND hwnd)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		HDC hdc = GetDC(hwnd);</span><br><span class="line">		HPEN hPen = CreatePen(PS_SOLID, <span class="number">4</span>, RGB(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>));</span><br><span class="line">		SelectObject(hdc, hPen);</span><br><span class="line">		<span class="keyword">int</span> iLength = <span class="number">0</span>;</span><br><span class="line">		TCHAR szBuffer[<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		iLength = wsprintf(szBuffer, <span class="string">L"Score: %u"</span>, uiScore);</span><br><span class="line">		TextOut(hdc, BOUNDSIZE * <span class="number">2</span> + GAME_WIDE * SNAKESIZE + <span class="number">100</span>,</span><br><span class="line">			BOUNDSIZE + <span class="number">200</span>, szBuffer, iLength);</span><br><span class="line">		ReleaseDC(hwnd, hdc);</span><br><span class="line">		DeleteObject(hPen);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></code></pre><p>在WM_PAINT里面调用函数<br>    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示分数</span></span><br><span class="line">		ShowScore(hwnd);</span><br></pre></td></tr></table></figure></p>
+<p>效果图如下：<br><img src="http://a1.qpic.cn/psb?/V13y9b4j30Ka7r/3VVJpwTmsucjHceFz.ROh4HMPMVfBq28JazRhZ8Vtu4!/m/dFQBAAAAAAAAnull&bo=CgUvAwAAAAADBwE!&rf=photolist&t=5" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/27/Windows编程贪吃蛇——控制区代码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-windows编程贪吃蛇——吃食物身体变长" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
